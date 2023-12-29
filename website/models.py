@@ -19,10 +19,10 @@ class Gift(models.Model):
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     name = models.CharField(max_length=100)
     qty = models.IntegerField()
-    color = models.CharField(max_length=100)
-    size = models.CharField(max_length=100)
-    store = models.CharField(max_length=100)
-    description = models.CharField(max_length=500)
+    color = models.CharField(max_length=100, blank=True, null=True)
+    size = models.CharField(max_length=100, blank=True, null=True)
+    store = models.CharField(max_length=100, blank=True, null=True)
+    description = models.CharField(max_length=500, blank=True, null=True)
     created = models.DateField(auto_now_add=True, blank=True, null=True)
     updated = models.DateField(auto_now=True, blank=True, null=True)
 
@@ -33,7 +33,7 @@ class Gift(models.Model):
 
 class Hobby(models.Model):
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
-    name = models.CharField(max_length=500)
+    name = models.CharField(max_length=500, blank=True, null=True)
 
     def __str__(self):
         return str(self.name)
