@@ -1,0 +1,27 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}
+My Profile
+{% endblock %}
+
+
+{% block content %}
+
+<body>
+    <div class="container">
+
+        <h1>My Profile</h1>
+        <br><br>
+        <div>
+            <img src="{{ MEDIA_URL }}{{ user.profile.avatar.url }}" alt="avatar">
+        </div>
+        <p>Username: &nbsp;{{ profile.username }}</p>
+        <p>Family: {{ user.profile.family_name }}</p>
+        <p>Birthday: {{ user.profile.birthday }}</p>
+        {% if user.profile.anniversary %}
+        <p>Anniversary: {{ user.profile.anniversary }} </p>
+        {% endif %}
+    </div>
+</body>
+{% endblock %}

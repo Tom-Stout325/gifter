@@ -1,0 +1,29 @@
+{% extends 'index.html' %} 
+{% load static %} 
+
+{% block title %} 
+    Login
+{% endblock %} 
+
+
+{% block content %}
+
+<body>
+    <div class="w-50 mt-5 mx-auto">
+
+        <form class='form-layout' action="" method="POST">
+            <h2 class="text-center">Please Login</h2>
+            <hr>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-outline-primary w-100">Submit</button>
+        </form>
+        <p class="text-center mt-3">Don't have an account?  <span><a href="{% url 'register' %}">Register</a></span></p>
+        
+        <p class="text-center mt-3">Forgot Password  <span><a href="{% url 'password_reset' %}">Reset Password</a></span></p>
+        
+    </div>
+    </div>
+</body>
+
+{% endblock %}
