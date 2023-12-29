@@ -51,21 +51,19 @@ class MyProfile(DetailView):
 
 
 def profileDtl(request, pk):
+    hobbies = Hobby.objects.filter(user_id=pk)
+    gifts = Gift.objects.filter(user_id=pk)
     profile = Profile.objects.get(id=pk)
-
     context = {
-        'profile': profile
+        'profile': profile,
+        'gifts': gifts,
+        'hobbies': hobbies,
     }
+    print(gifts)
     return render(request, 'website/profiles_detail.html', context)
 
 
     
-
-
-
-
-
-
 
 
 

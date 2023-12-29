@@ -11,12 +11,9 @@ urlpatterns = [
     path('families/', AllFamilyView.as_view(), name='families'),
     path('family/<str:pk>/', familyProfiles, name='family'),
     path('profile/', MyProfile.as_view(), name='profile'),
-
-
-
     path('profile_dtl/<str:pk>/', profileDtl, name='profile_dtl'),
-
     path('profiles/', AllProfiles.as_view(), name='profiles'),
+    
 
     
 ]

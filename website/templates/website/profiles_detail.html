@@ -2,26 +2,28 @@
 {% load static %}
 
 {% block title %}
-My Profile
+{{ profile.user.first_name}}'s Profile
 {% endblock %}
 
 
 {% block content %}
 
 <body>
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12 col-md-3">
+
+    <div class="row m-3" style=" padding: 2rem; border: 1px solid red">
+
+        <div class="col-sm-12 col-md-2">
             <div class="card">
-                <h3 class="card-header text-success text-center">{{ profile.user.first_name }} {{ profile.user.last_name }}</h3>       
+                <h3 class="card-header text-success text-center bg-light">{{ profile.user.first_name }} {{ profile.user.last_name }}</h3>
                 <img src="{{ MEDIA_URL }}{{ profile.avatar.url }}" alt="avatar" class="d-block user-select-none"
-                focusable="false" role="img" id="card-img">         
+                    focusable="false" role="img" id="card-img">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item fs-5 text-success"> <span class="text-muted fs-6">Family: </span>&nbsp;{{ profile.family_name }}</li>
-                    <li class="list-group-item fs-5 text-success"><span class="text-muted fs-6">Username: </span>&nbsp;{{ profile.user.username|title }}</li>
-                    <li class="list-group-item fs-5 text-success"><span class="text-muted fs-6">Birthday: </span>&nbsp;{{ profile.birthday }}</li>
+                    <li class="list-group-item fs-5 text-success"><span class="text-muted fs-6">Username:</span>&nbsp;{{ profile.user.username|title }}</li>
+                    <li class="list-group-item fs-5 text-success"><span class="text-muted fs-6">Birthday:</span>&nbsp;{{ profile.birthday }}</li>
                     {% if profile.anniversary %}
-                    <li class="list-group-item fs-5 text-success">><span class="text-muted fs-6">Anniversary:</span>&nbsp;{{ profile.anniversary }}</li>
+                    <li class="list-group-item fs-5 text-success">><span
+                            class="text-muted fs-6">Anniversary:</span>&nbsp;{{ profile.anniversary }}</li>
                     {% endif %}
                 </ul>
                 <div class="card-footer text-muted">
@@ -29,15 +31,54 @@ My Profile
                 </div>
             </div>
         </div>
-        <div class="col-sm-12 col-md-4" style="border: 1px solid red">
-            <h3>Hobbies</h3>
+
+        <div class="col-sm-12 col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-header text-success text-center bg-light">Wish List</h3>            
+                </div>
+                <div class="card card-body">
+                    <table class="table">
+                        <tr>
+                            <th>Gift</th>
+                            <th>QTY</th>
+                            <th>Store</th>
+                            <th>Added</th>
+                            <th>Updated</th>
+                            <th>View</th>
+                        </tr>
+                        {% for i in gifts %}
+                            <tr>
+                                <td>{{ i.name|slice:"10" }}</td>
+                                <td>{{ i.qty }}</td>
+                                <td>{{ i.store }}</td>
+                                <td>{{ i.created }}</td>
+                                <td>{{ i.updated }}</td>
+                                <td> <a class="btn btn-outline-success" href="">View</a> </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
         </div>
-        <div class="col-sm-12 col-md-5" style="border: 1px solid red">
-            <h3>Gifts</h3>
+    
+        <div class="col-sm-12 col-md-4">
+            <div class="card">
+                <div class="card-header">                   
+                    <h3 class="card-header text-success text-center bg-light">Hobbies</h3>
+                </div>
+                <div class="card card-body">
+                    {% if hobbies %}
+                        <ul>
+                            {% for i in hobbies %}
+                                <li>{{ i.name }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>    
         </div>
-        
     </div>
-</div>
 
 </body>
 {% endblock %}

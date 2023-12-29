@@ -1,11 +1,12 @@
 - All links are working
+- Added Hobbies and Gifts
 
 
 Next:
 
-Add Hobbies
-
-Add Gifts
+Fix:
+    profiles_detail.html:
+    Gift and Hobbies need to match user id
 
 
 
