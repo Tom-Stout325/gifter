@@ -6,4 +6,4 @@ venv
 .vscode
 .env
 *.pyc
-z_notes.txt
+.txt
