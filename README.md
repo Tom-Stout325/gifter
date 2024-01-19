@@ -20,10 +20,6 @@
 
 > This project is a work in-progress and I hope to have it completed soon.
 
-## Technology Stack:
-
-
-
 ___
 
 
