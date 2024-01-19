@@ -1,4 +1,6 @@
->-=-=-=-=->   <h1>G I F T E R</h1>   <-=-=-=-=- ![Custom Django Admin](static/images/gifter.png)
+>![Custom Django Admin](static/images/gifter.png)
+
+><h1><span style="color: green; text-align: center">G I F T E R<span></h1>
 
 
 <h4 align="center">Your Family Gift Registry</h4>
