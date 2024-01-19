@@ -1,0 +1,47 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}
+{{ family.0 }}
+{% endblock %}
+
+
+{% block content %}
+
+<body>
+    
+    <div class="container">
+        <h1 class="text-center text-success">Our Family</h1>
+    </div>
+    <div class="container">
+        <div class="row mx-auto">
+            {% for i in family %}
+                <div class="card m-3" id="card">
+                    {% if i.avatar %}
+                        <img src="{{ MEDIA_URL}}{{ i.avatar.url }}" class="card-img-top p-3" alt="avatar">
+                        {% else %}
+                        <img src="{% static 'images/default_user.png' %}" class="card-img-top p-3" alt="avatar">
+                    {% endif%}
+            <div class="card-body">
+                <h5 class="card-title text-center text-success">{{ i.user.first_name }} {{ i.last_name}}</h5>
+            </div>
+                <div class="card-body d-grid gap-2">
+                    <span class="tips card-body d-grid gap-2" title="Please log in to view family members!">
+                        <a href="" class="btn btn-outline-primary btn-block">{{ users.first_name }}'s Page</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div>
+       Name {{ users }}
+    </div>
+    {% endfor %}
+    <script>
+        const tooltips = document.querySelectorAll('.tips')
+        tooltips.forEach(t => {
+            new bootstrap.Tooltip(t)
+        })
+    </script>
+</body>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'index.html' %} 
+{% load static %} 
+
+{% block title %} 
+    Update Information 
+{% endblock %} 
+
+
+{% block content %}
+ 
+<div class="form-group" id="register-form">
+    <form action="" method="POST">
+        <h2 class="text-center">Change your User Information</h2>
+        <hr>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary w-100">Submit</button>
+    </form>
+</div> 
+
+{% endblock %}

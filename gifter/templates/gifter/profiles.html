@@ -1,0 +1,49 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}
+    Profiles
+{% endblock %}
+
+
+{% block content %}
+
+
+<body>
+   
+    <div class="container-fluid">
+        <h2 class="text-center text-success">All Profiles</h2>
+        <div class="col-sm-12 col-md-6 mt-3 mx-auto">
+
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Birthday</th>
+                        <th scope="col">Anniversary</th>
+                        <th scope="col">Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in profiles %}
+                    <tr>
+                        <td>{{ i.first_name }} {{ i.last_name }}</td>
+                        <td>{{ i.username }}</td>
+                        <td>{{ i.birthday }}</td>
+                        <td>{{ i.anniversary }}</td>
+                        <td>
+                            <a type="submit" class="btn btn-success  me-1" href="{% url 'profile' i.id %}">
+                                <i class="fa-solid fa-circle-info fa-md"></i>
+                            </a>
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</body>
+{% endblock %}

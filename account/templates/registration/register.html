@@ -1,0 +1,45 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}
+Register
+{% endblock %}
+
+{% block content %}
+
+
+{% if user.is_authenticated %}
+<h1>You are already signed in.</h1>
+{% else %}
+
+<div class="form-group" id="register-form">
+	<form action="" method="POST">
+		<h2 class="text-center">Please Register</h2>
+		<hr>
+		{% csrf_token %}
+		{{ form.as_p }}
+		<button class="btn btn-primary w-100">Submit</button>
+	</form>
+</div>
+
+
+	{% for field in registration_form %}
+	<p>
+		{% for error in field.errors %}
+			<p style="color: red">{{ error }}</p>
+		{% endfor %}
+	</p>
+	{% endfor %}
+
+	{% if registration_form.non_field_errors %}
+		<div style="color: red">
+			<p>{{registration_form.non_field_errors}}</p>
+		</div>
+	{% endif %}
+{% endif %}
+</form>
+</div>
+<p class="text-center mt-3">Already have an account? <span><a href="{% url 'login' %}">Login</a></span></p>
+
+
+{% endblock %}

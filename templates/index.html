@@ -1,0 +1,57 @@
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title> {% block title %} {% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="{% static '/images/favicon.ico' %}">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/spacelab/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/app.css' %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400&family=Kalnia:wght@100;300;400&display=swap" rel="stylesheet">
+
+
+
+    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+</head>
+{% for message in messages %}
+{{ messages }}
+{% endfor %}
+
+<body>
+    {% include 'navbar.html' %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-6 text-center mb-4 mt-5">
+                <img id="header-img" src="{% static 'images/gifter.png' %}" width="50%" alt="Gifter Logo">
+            </div>
+            <div class="col-sm-12 col-md-4 header-div">
+                <h1 class="header-txt">Gifter</h1>
+            </div>
+        </div>
+    </div>
+    <div class="container"><h2 
+        style="
+            text-align: center; font-family: 'Kalnia', serif; letter-spacing: 4px; color: lightskyblue;"
+        >Your Family Gift Registry</h2> </div>
+    <hr class="w-75 mx-auto">
+    {% block content %}
+
+    {% endblock %}
+
+    {% include 'footer.html' %}
+</body>
+
+</html>

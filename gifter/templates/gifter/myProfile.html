@@ -1,0 +1,94 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}
+{{ profile.first_name}}'s Profile
+{% endblock %}
+
+
+{% block content %}
+
+<body>
+    <div class="container text-center mb-3">
+        <h1 class="text-primary">{{ profile.first_name }}'s Profile</h1>
+    </div>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="card col-sm-12 col-md-3" id="profile-card" style="width: 18rem;">
+                {% if profile.profile_image %}
+                <img src="{{ MEDIA_URL}}{{ i.profile_image.url }}" class="card-img-top p-3" alt="avatar">
+                {% else %}
+                <img src="{% static 'images/default_user.png' %}" class="card-img-top p-3" alt="avatar">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title text-center text-primary">{{ profile.first_name }} {{ profile.last_name }}</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Username: &nbsp;{{ profile.username}}</li>
+                    <li class="list-group-item">Birthday: &nbsp; {{ profile.birthday }}</li>
+                    {% if profile.anniversary %}
+                        <li class="list-group-item">Anniversary: &nbsp;{{ profile.anniversary }}</li>
+                    {% endif %}
+                    <li class="list-group-item">Family: &nbsp;<a href=""> {{ profile.family}}</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-12 col-md-8">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" data-bs-toggle="tab" href="#wish" aria-selected="true"
+                            role="tab">Wish List</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" data-bs-toggle="tab" href="#hobby" aria-selected="false" tabindex="-1" role="tab">Hobbies</a>
+                    </li>
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane fade show active" id="wish" role="tabpanel">
+                        <br>
+                        <table class="table">
+                            <thead>
+                                <th class="text-primary">Name</th>
+                                <th class="text-primary">QTY</th>
+                                <th class="text-primary">Updated</th>
+                                <th class="text-primary">View</th>
+                            </thead>
+                            <tr>
+                                {% for i in gifts %}
+                                <td class="text-primary">{{ i.name }}</td>
+                                <td class="text-primary">{{ i.qty }}</td>
+                                <td class="text-primary">{{ i.updated }}</td>
+                                <td class="text-primary"> <a href="{% url 'giftDetail' gifts.id %}" class="btn btn-outline-primary">View</a></td>
+                                {% endfor %}
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="hobby" role="tabpanel">
+                        <ul>
+                            <br>
+                            <div>
+                                {% for i in hobby %}
+                                <li class="fs-5 text-primary">
+                                    <i class="fa-solid fa-hashtag"></i>
+                                        {{ i.name }}
+                                    {% if i.description %}
+                                    <span class="text-justify">
+                                        : {{ i.description }}
+                                    </span>
+                                    {% endif %}
+                                </li>
+                                <hr class="w-50 text-primary">
+                                {% endfor %}
+                            </div>
+                            <br>
+   
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}
+
+
