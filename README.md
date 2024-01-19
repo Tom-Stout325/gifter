@@ -1,6 +1,6 @@
 >![Custom Django Admin](static/images/gifter.png)
 
-><h1><span style="color: green; text-align: center">G I F T E R<span></h1>
+><span style="color: green; text-align: center">G I F T E R<span>
 
 
 <h4 align="center">Your Family Gift Registry</h4>
