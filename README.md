@@ -3,7 +3,7 @@
 ><h1 align="center">G I F T E R<h1>
 
 
-<h4 align="center">Your Family Gift Registry</h4>
+><h3 align="center">Your Family Gift Registry</h3>
 
 > ![Django](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=green)
 ![Python](https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue)
