@@ -1,4 +1,4 @@
-![Custom Django Admin] align="center"(static/images/gifter.png)
+>![Custom Django Admin](static/images/gifter.png)
 
 <h1 align="center">G I F T E R</h1>
 
