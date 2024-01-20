@@ -14,6 +14,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import auth, messages
 from django.utils.decorators import method_decorator
 from .models import *
+from account.models import *
 from .forms import *
 from account.models import *
 from django.contrib.auth import update_session_auth_hash
@@ -22,10 +23,6 @@ from django.views import View
 
 
 
-# def profile(request, pk):
-#     profile = Profile.objects.get(id=pk)
-#     return render(request, 'accounts/profile.html', {'profile': profile })
-
 class Profiles(ListView):
     model = Account
     template_name = 'gifter/profiles.html'
@@ -33,45 +30,34 @@ class Profiles(ListView):
 
 
 def profile(request, pk):
-    user = Account.objects.filter(id = pk)
-    gifts = Gift.objects.filter(user_id=pk)
+    user = Account.objects.get(id=pk)
+    gifts = Gift.objects.filter(user__id=pk)
+    giftDtl = Gift.objects.filter(id=pk)
     hobby = Hobby.objects.filter(user_id=pk)
     context = {
         'user': user,
         'gifts': gifts,
         'hobby': hobby,
+        'giftDtl': giftDtl,
     }
+    
     return render(request, 'gifter/profile.html', context)
-
-
 
 
 @login_required(login_url='login')
 def myProfile(request, pk):
-    giftForm = GiftForm(request.POST)
-    hobbyForm = HobbyForm(request.POST)
-    if request.method == 'POST':
-        prof_form = RegisterUpdate(request.POST, request.FILES, instance=request.user)
-        if prof_form.is_valid():        
-            prof_form.save()
-            messages.success(request, 'Your profile is updated successfully')
-            return redirect('myProfile')
-    else:
-        hobby = Hobby.objects.filter(user_id=pk)
-        gifts = Gift.objects.filter(user_id=pk)
-        profile = Account.objects.get(id=pk)
-        prof_form = RegisterUpdate(instance=request.user)
+    account = request.user
+    user = Account.objects.get(id=pk)
+    gifts = Gift.objects.filter(user_id=pk)
+    hobbies = Hobby.objects.filter(user_id=pk)
     context = {
-        'profile': profile,
-        'prof_form': prof_form,
+        'user': user,
         'gifts': gifts,
-        'hobby': hobby,
-        'giftForm': giftForm,
-        'hobbyForm': hobbyForm,
+        'hobbies': hobbies,
+        'account': account,
     }
-    print(profile)
+    print(user)
     return render(request, 'gifter/myProfile.html', context)
-
 
 
 class Families(ListView):
@@ -91,14 +77,17 @@ def family(request, pk):
 
 
 
+
+
+
 def giftDetail(request, pk):
-    user = Account.objects.filter(id=pk)
-    gift = Gift.objects.filter(id=pk)
-   
+    gift = Gift.objects.get(id=pk)
     context = {  
         'gift': gift,
-        'user': user,
+       
+     
     }
+    print(gift)
     return render(request, 'gifter/gift_detail.html', context)
 
 

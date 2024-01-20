@@ -13,12 +13,83 @@ Register
 {% else %}
 
 <div class="form-group" id="register-form">
-	<form action="" method="POST">
-		<h2 class="text-center">Please Register</h2>
-		<hr>
+	<h2 class="text-center">Please Register</h2>
+    <form method='POST' enctype="multipart/form-data">
 		{% csrf_token %}
-		{{ form.as_p }}
-		<button class="btn btn-primary w-100">Submit</button>
+		<hr>
+		<div class="row">
+			<div class="col-sm-12 mt-5">
+				<div class="form-group">
+					<div class="row">
+						<div class="col-sm-12 col-md-4">
+							<label class="small mb-1">First Name:</label>
+							<input type="text" class="form-control mb-3"/>
+						</div>
+						<br>
+						<div class="col-sm-12 col-md-4">
+							<label class="small mb-1">Last Name:</label>
+							<input type="text" class="form-control" name='username' />
+						</div>
+
+						<div class="col-sm-12 col-md-4">
+							<label class="small mb-1">Family:</label>
+							<input type="text" class="form-control" name='username' />
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-sm-12 col-md-5" class="small mb-1">
+							<label for="inputEmail">Email:</label>
+							<input type="email" class="form-control small mb-3" id="inputEmail">
+						</div>
+						<br>
+						<div class="col-sm-12 col-md-5">
+							<label for="username" class="small mb-1">Username:</label>
+							<input type="text" class="form-control mb-3" name='username' />
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-sm-12 col-md-5" class="small mb-1">
+							<label for="inputBirthday">Birthday:</label>
+							<input type="date" class="form-control small mb-3" id="inputBirthday">
+						</div>
+						<br>
+						<div class="col-sm-12 col-md-5">
+							<label for="anniversary" class="small mb-1">Anniversary:</label>
+							<input type="date" class="form-control mb-5" name='username' />
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-sm-12 col-md-5" class="small mb-1">
+							<label for="inputBirthday">Profile Image:</label>
+							<input type="file" class="form-control small mb-5" id="inputImage">
+						</div>
+						<br>
+					</div>
+
+					<div class="row">
+						<div class="col-sm-12 col-md-5" class="small mb-1">
+							<label for="inputBirthday">Password:</label>
+							<input type="password" class="form-control small mb-3" id="password1">
+						</div>
+						<br>	
+						<div class="col-sm-12 col-md-5" class="small mb-1">
+							<label for="inputBirthday">Repeat Password:</label>
+							<input type="password" class="form-control small mb-5" id="password2">
+						</div>			
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+
+		<button class="btn btn-primary w-100 mb-3">Submit</button>
 	</form>
 </div>
 

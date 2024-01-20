@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from PIL import Image
 
 
 
@@ -13,6 +14,16 @@ class Family(models.Model):
     
     class Meta:
         verbose_name_plural = "Families"
+
+    def save(self, *args, **kwargs):
+        super().save()
+
+        img = Image.open(self.avatar.path)
+
+        if img.height > 300 or img.width > 300:
+            new_img = (300, 300)
+            img.thumbnail(new_img)
+            img.save(self.avatar.path)
 
  
 
@@ -31,6 +42,16 @@ class Gift(models.Model):
 
     def __str__(self):
         return f"{self.name}"  
+
+    def save(self, *args, **kwargs):
+        super().save()
+
+        img = Image.open(self.image.path)
+
+        if img.height > 300 or img.width > 300:
+            new_img = (300, 300)
+            img.thumbnail(new_img)
+            img.save(self.image.path)
 
 
 

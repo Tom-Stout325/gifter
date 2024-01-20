@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
+from PIL import Image
 
 
 class MyAccountManager(BaseUserManager):
@@ -33,6 +34,18 @@ class MyAccountManager(BaseUserManager):
     def get_by_natural_key(self, username):
         return self.get(username=username)
 
+FAMILY = [
+   ("Jamie", "Jamie"),
+   ("Tom", "Tom & Leslie"),
+   ("Jonielle", "Jonielle"),
+   ("Mary", "Mike & Mary"),
+   ("Tim", "Tim & Emily"),
+   ("Anthony", "Anthony & Erica"),
+   ("Jeremy", "Jeremy & Kiara"),
+   ("Scotty", "Scotty & Desiree"),
+   ("Elizabeth", "Elizabeth"),
+]
+
 
 class Account(AbstractBaseUser, PermissionsMixin):
     email                   = models.EmailField(max_length=100, unique=True)
@@ -48,7 +61,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
     is_active               = models.BooleanField(default=True)
     is_staff                = models.BooleanField(default=False)
     is_superuser            = models.BooleanField(default=False)
-    profile_image           = models.ImageField(max_length=255, upload_to='avatars', null=True, blank=True, default='default_user.png')
+    profile_image           = models.ImageField(max_length=255, upload_to='profile_images', null=True, blank=True, default='default_user.png')
     
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
@@ -63,3 +76,13 @@ class Account(AbstractBaseUser, PermissionsMixin):
     
     def has_module_perms(self, app_label):
         return True
+    
+    def save(self, *args, **kwargs):
+        super().save()
+
+        img = Image.open(self.profile_image.path)
+
+        if img.height > 300 or img.width > 300:
+            new_img = (300, 300)
+            img.thumbnail(new_img)
+            img.save(self.profile_image.path)

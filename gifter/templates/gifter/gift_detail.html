@@ -2,63 +2,57 @@
 {% load static %}
 
 {% block title %}
-{{ profile.user.first_name}}'s Wishlist
+{{ gift.name}}
 {% endblock %}
 
 
 {% block content %}
-
-<div class="row">
-{% for i in user %}
-    <div class="w-75 p-5 mx-auto">
-        <h1 class="text-center text-success">{{ i.first_name }} {{ i.last_name }}</h1>
-        <hr class="text-success">
-    </div>
-
-
-   
-    <div class="col-sm-12 col-md-4">
-        <div class="card" id="profile-card" style="width: 18rem; margin: auto; margin-bottom: 3rem;">
-            <img src="{{ MEDIA_URL }}{{ i.profile_image.url }}" alt="avatar">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Username: &nbsp; {{ i.username|title }}</li>
-                <li class="list-group-item">Birthday: {{ i.birthday }}</li>
-                {% if i.anniversary %}
-                <li class="list-group-item">Anniversary: &nbsp; {{ i.anniversary }}</li>
-                {% endif %}
-            </ul>
-        </div>
-    </div>
-    {% endfor %}
-    
-        <div class="col-sm-12 col-md-4 mt-5">
-            {% for i in gift %}
-                <div class="text-center">
-                    <img src="{{ MEDIA_URL }}{{ i.image.url }}" alt="avatar" class="w-50">
-                    <h3 >{{ i.name }}</h3>
-                </div>   
-        </div>
+<body>
+    <div class="w-75 p-5 mx-auto"> 
+        <h1 class="text-center text-success">{{ gift.user.first_name }} {{ gift.user.last_name }}</h1>
+            <hr class="text-success">
+        <h3 class="text-success text-center mt-4">{{ gift.name }}</h3>
+    </div>      
+        <br>
+    <div class="row container mx-auto">
         <div class="col-sm-12 col-md-3">
-            <br>
-            <h3 class="text-center">Details</h3>
-            <hr>
-            <br>
-            
-            <p>Quantity:&nbsp; {{ i.qty }}</p>
-            {% if i.color %}
-                <p>Color:&nbsp; {{ i.color }}</p>
-            {% endif %}
-            {% if i.size %}
-                <p>Size:&nbsp; {{ i.size }}</p>
-            {% endif %}
-            <p>Store:&nbsp; {{ i.store }}</p>     
-            <p>Updated on:&nbsp; {{ i.updated }}</p>
-            <p>Description:&nbsp; {{ i.description }}</p>
+            <div class="card">
+                <img src="{{ MEDIA_URL }}{{ gift.user.profile_image.url }}" alt="avatar">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Username: &nbsp; {{ gift.user.username }}</li>
+                    <li class="list-group-item">Birthday: {{ gift.user.birthday }}</li>
+                    {% if gift.user.anniversary %}
+                        <li class="list-group-item">Anniversary: &nbsp; {{ gift.user.anniversary }}</li>
+                    {% endif %}
+                </ul>
+            </div>
         </div>
-        <div class="container text-center">
-            <a class="btn btn-primary btn-lg" href="">Go Back</a>
+        <div class="col-sm-12 col-md-4 mx-auto">
+                <br> <br>
+            <div class="text-center text-success">
+                <img src="{{ MEDIA_URL }}{{ gift.image.url }}" alt="avatar" class="w-50">               
+                <br><br><br>
+            </div>   
+        </div>
+        <div class="col-sm-11 col-md-4 details">
+            <h3 class="text-center text-success">Gift Details</h3>
+            <h5>Quantity:&nbsp; {{ gift.qty }}</h5>
+
+            {% if gift.color %}
+                <h5>Color:&nbsp; {{ gift.color }}</h5>
+            {% endif %}
+
+            {% if gift.size %}
+                <h5>Size:&nbsp; {{ giftsize }}</h5>
+            {% endif %}
+
+            <h5>Store:&nbsp; {{ gift.store }}</h5>     
+            <h5>Description:&nbsp; {{ gift.description }}</h5>
+            <h5 class="text-muted">Updated on:&nbsp; {{ gift.updated }}</h5>
         </div>
     </div>
-    {% endfor %}
+    <div class="container text-center mt-4 mb-4">    
+        <a class="btn btn-primary btn-lg" href="{% url 'profiles' %}">Go Back</a>
+    </div>
 </div>
 {% endblock %}

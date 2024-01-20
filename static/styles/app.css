@@ -15,16 +15,6 @@ a {
   text-decoration: none;
 }
 
-/* .header-txt>h1 {
-    font-family: 'Kalnia', serif;
-    letter-spacing: 6px;
-    font-size: 6vw;
-    color: rgb(87, 165, 130);
-
-
-
-} */
-
 @media (max-width: 600px) {
   .header-txt {
     font-family: 'Kalnia', serif;
@@ -33,10 +23,21 @@ a {
     color: #2db8ac;
     text-align: center;
   }
+  #register-form,
+  #login-form {
+    width: 90%;
+    margin: auto;
+  }
+
+  .details {
+    max-width: 90%;
+    margin: auto;
+  }
 }
 
+
+
 @media (min-width: 601px) {
- 
   .header-txt {
       font-family: 'Kalnia', serif;
       letter-spacing: 8px;
@@ -44,37 +45,22 @@ a {
       color: #2db8ac;
       margin-left: 15%;
       margin-top: 7rem;
-      
     }
-}
-
-
-
-
-
-@media (max-width: 600px) {
-  #register-form,
-  #login-form {
-    width: 90%;
-    margin: auto;
-  }
-}
-
-@media (min-width: 601px) {
-  #register-form,
-  #login-form {
-    max-width: 25%;
-    margin: auto;
-  }
-
-  .profile {
-    margin: 1rem 3rem;
-      img {
-        width: 300px;
-        height: 300px;
-        object-fit: contain;
+      #register-form,
+      #login-form {
+        max-width: 90%;
+        margin: auto;
       }
-  }
+
+      .profile {
+        margin: 1rem 3rem;
+          img {
+            width: 300px;
+            height: 300px;
+            object-fit: contain;
+          }
+    }
+
 }
 
 #card {
@@ -92,16 +78,6 @@ a {
 .profile-row {
   max-width: 90%;
 }
-/* 
-#profile-card {
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
-    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-  width: 90%;
-  margin: auto;
-  margin-bottom: 5rem;
-} */
-
 
 .table {
   color: rgb(29, 103, 207);

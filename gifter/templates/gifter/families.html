@@ -8,29 +8,28 @@
 
 {% block content %}
 <body>
- 
     <div class="container">
-        <h1 class="text-center text-success">Our Family</h1>
+        <h1 class="text-center text-success mt-5 mb-5">Our Family</h1>
     </div>
-    <div class="container">
-        <div class="row mx-auto">
-            {% for i in family %}
-            <div class="card m-3" id="card">
-                <img src="{{ MEDIA_URL}}{{i.avatar.url }}" id="card-img" alt="avatar">
-                <div class="card-body">
-                    <h5 class="card-title text-center text-success">{{ i.name }}</h5>
-                </div>
-                <div class="card-body d-grid gap-2">
-                    <span class="tips card-body d-grid gap-2" 
+    <div class="row container mx-auto">
+        {% for i in family %}
+        <div class="card m-3" id="card">
+            <img src="{{ MEDIA_URL}}{{i.avatar.url }}" id="card-img" alt="avatar">
+            <div class="card-body">
+                <h5 class="card-title text-center text-success">{{ i.name }}</h5>
+            </div>
+            <div class="card-body d-grid gap-2">
+                <span class="tips card-body d-grid gap-2" 
                     data-bs-toggle="tooltip"
                     data-bs-placement="right" 
                     title="Please log in to view family members!">
-                    <a href="{% url 'family' i.id %}" class="card-link btn btn-outline-primary btn-block">Family Page</a></span>
-                </div>
+                <a href="{% url 'family' i.id %}" class="card-link btn btn-outline-primary btn-block mb-4">Family Page</a></span>
+                <br>
             </div>
-            {% endfor %}
         </div>
+        {% endfor %}
     </div>
+   
     <script>
         const tooltips = document.querySelectorAll('.tips')
         tooltips.forEach(t => {

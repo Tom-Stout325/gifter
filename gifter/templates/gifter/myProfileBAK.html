@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-{{ profile.user.first_name}}'s Profile
+{{ account.first_name}}'s Profile
 {% endblock %}
 
 
@@ -11,140 +11,86 @@
 <body>
   
     <div class="container text-center mb-3">
-        <h1 class="text-primary">{{ user.first_name }} {{ user.last_name }}</h1>
+        <h1 class="text-primary">{{ account.first_name }}'s Profile</h1>
     </div>
-        <hr class="text-primary w-50 mx-auto">
-        <br>
-    <div class="row">
-        <div class="card col-sm-10 col-md-2" id="profile-card">
-            {% if user.profile.avatar %}
-                <img src="{{ MEDIA_URL}}{{ user.profile.avatar.url }}" class="card-img-top" alt="avatar">
-            {% else %}
-                <img src="{% static 'images/default_user.png' %}" class="card-img-top" alt="avatar">
-            {% endif%}
-
-            <div class="card-body">
-                <h5 class="card-title text-center text-primary">{{ user.first_name }} {{ user.last_name }}
-                </h5>
-            </div>
-            <ul class="list-group list-group-flush p-5">
-                <li class="list-group-item">Username: &nbsp;{{ user.username}}</li>
-                <li class="list-group-item">Email: &nbsp; {{ user.email }}</li>
-                <li class="list-group-item">Birthday: &nbsp; {{ user.profile.birthday }}</li>
-                {% if user.profile.anniversary %}
-                <li class="list-group-item">Anniversary: &nbsp;{{ user.profile.anniversary }}</li>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="card col-sm-12 col-md-3" id="profile-card" style="width: 18rem;">
+                {% if i.account.profile_image %}
+                <img src="{{ MEDIA_URL}}{{ i.account.profile_image.url }}" class="card-img-top p-3" alt="avatar">
+                {% else %}
+                <img src="{% static 'images/default_user.png' %}" class="card-img-top p-3" alt="avatar">
                 {% endif %}
-            </ul>
-        </div>
-        <div class="col-sm-11 col-md-5 rounded" id='profile-card'>
-            <div class="pt-5">
-                <h3 class="text-center text-success">Change Your Information</h3>
-            </div>
-
-            <div class="form-content">
-                <form method='POST' enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div class="form-row">
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col">
-                                        <label class="small mb-1">Email:</label>
-                                        <input type="email" class="form-control" {{ user.email }}> </input>
-                                    </div>
-                                    <br>
-                                    <div class="col">
-                                        <label class="small mb-1">Username:</label>
-                                        <input type="text" class="form-control" name='username' {{ reg_form.username }}>
-                                        </input>
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="form-group py-3">
-                                <div class="row">
-                                    <div class="col">
-                                        <label>Birthday:</label>
-                                        <input type="date" class="form-control" name='birthday' {{ prof_form.birthday }}
-                                            </div>
-                                        <div class="col">
-                                            <label class=" mb-1">Anniversary:</label>
-                                            <input type="date" class="form-control" {{ prof_form.anniversary }} </div>
-                                        </div>
-                                    </div>
-                                    <br />
-                                    <div class="row mb-4">
-                                        <label>Change Your Avatar:</label>
-                                        <input type="file" class="form-data" {{ prof_form.avatar
-                                            }} </div>
-                                    </div>
-                                    <hr class="text-primary mb-3 mt-3" />
-                                    <div class="form-group text-center">
-                                        <a class="btn btn-outline-primary" href="{% url 'password_change' %}">Change
-                                            Your Password</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-success btn-lg mx-5">Save Changes</button>
-                                <button type="reset" class="btn btn-danger btn-lg">Cancel</button>
-                            </div>
-                </form>
-
-
-            </div>
-
-
-
-
-
-
-
-
-
-
-
-            <div class="col-sm-12 col-md-8">
-                <h3 class="text-center text-primary mb-3">Gifts</h3>
-                <table class="table">
-                    <thead>
-                        <th class="text-primary">Name</th>
-                        <th class="text-primary">QTY</th>
-                        <th class="text-primary">Updated</th>
-                        <th class="text-primary">View</th>
-                    </thead>
-                    <tr>
-                        {% for i in gifts %}
-                        <td class="text-primary">{{ i.name }}</td>
-                        <td class="text-primary">{{ i.qty }}</td>
-                        <td class="text-primary">{{ i.updated }}</td>
-                        <td class="text-primary"> <a href="" class="btn btn-outline-primary">View</a>
-                        </td>
-                        {% endfor %}
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <hr class="text-primary w-75 mx-auto">
-        <div class="container mt-3">
-            <div class="row" style="border: 1px solid red">
-
-
-            </div>
-            <div class="col-sm-12 col-md-3">
-                <div>
-                    <h3 class="text-center text-primary">Hobbies</h3>
+                <div class="card-body">
+                    <h5 class="card-title text-center text-primary">{{ account.first_name }} {{ account.last_name }}</h5>
                 </div>
-                <div>
-                    <ul>
-                        {% for i in hobbies %}
-                        <li class="fs-4"><a href="">{{ i.name }}</a> </li>
-                        {% endfor %}
-                    </ul>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Username: &nbsp;{{ account.username}}</li>
+                    <li class="list-group-item">Birthday: &nbsp; {{ account.birthday }}</li>
+                    {% if user.anniversary %}
+                        <li class="list-group-item">Anniversary: &nbsp;{{ account.anniversary }}</li>
+                    {% endif %}
+                    <li class="list-group-item">Family: &nbsp;<a href=""> {{ account.family}}</a></li>
+                </ul>
+            </div>
+           
+            <div class="col-sm-12 col-md-8">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" data-bs-toggle="tab" href="#wish" aria-selected="true"
+                            role="tab">Wish List</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" data-bs-toggle="tab" href="#hobby" aria-selected="false" tabindex="-1" role="tab">Hobbies</a>
+                    </li>
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane fade show active" id="wish" role="tabpanel">
+                        <br>
+                        <table class="table">
+                            <thead>
+                                <th class="text-primary">Name</th>
+                                <th class="text-primary">QTY</th>
+                                <th class="text-primary">Updated</th>
+                                <th class="text-primary">View</th>
+                            </thead>
+                            <tr>
+                                {% for i in gifts %}
+                                <td class="text-primary">{{ i.name }}</td>
+                                <td class="text-primary">{{ i.qty }}</td>
+                                <td class="text-primary">{{ i.updated }}</td>
+                                <td class="text-primary"> <a href="" class="btn btn-outline-primary">View</a></td>
+                                {% endfor %}
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="hobby" role="tabpanel">
+                        <ul>
+                            <br>
+                            <div>
+                                {% for i in hobbies %}
+                                <li class="fs-5 text-primary">
+                                    <i class="fa-solid fa-hashtag"></i>
+                                        {{ i.name }}
+                                    {% if i.description %}
+                                    <span class="text-justify">
+                                        : {{ i.description }}
+                                    </span>
+                                    {% endif %}
+                                </li>
+                                <hr class="w-50 text-primary">
+                                {% endfor %}
+                            </div>
+                            <br>
+   
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </body>
 {% endblock %}
+
+

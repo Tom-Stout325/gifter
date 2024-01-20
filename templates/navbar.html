@@ -14,9 +14,7 @@
             <span class="visually-hidden">(current)</span>
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="">Family</a>
-        </li>
+        
         <li class="nav-item">
           <a class="nav-link" href="{% url 'families' %}">Families</a>
         </li>
@@ -24,7 +22,7 @@
           <a class="nav-link" href="{% url 'profiles' %}">All Profiles</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="">My Profile</a>
+          <a class="nav-link" href="{% url 'myProfile' user.id %}">My Profile</a>
         </li>
 
 
@@ -32,10 +30,10 @@
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-            aria-expanded="false">Profiles</a>
+            aria-expanded="false">Forms</a>
           <div class="dropdown-menu">
 
-            <a class="dropdown-item" href="#">My Family's Profiles</a>
+            <a class="dropdown-item" href="{% url 'update' user.id %}">Update Profile</a>
             <a class="dropdown-item" href="">All Profiles</a>
             {% if user.is_authenticated %}
             <div class="dropdown-divider"></div>

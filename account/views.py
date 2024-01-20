@@ -10,7 +10,8 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from .forms import *
-
+from .models import Account
+from django.contrib.auth.models import User
 
 
 class RegisterUser(CreateView):
@@ -22,10 +23,35 @@ class RegisterUser(CreateView):
 class RegisterUpdate(LoginRequiredMixin, UpdateView):
     form_class = RegisterUpdate
     template_name = 'registration/register_update.html'
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('myProfile')
 
     def get_object(self):
         return self.request.user
+
+
+
+
+@login_required(login_url='login')
+def registerUpdate(request, pk):
+    user = Account.objects.get(id=pk)
+    if request.method == 'POST':
+        form = RegisterUpdate(request.POST, instance=request.user)
+       
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('myProfile')
+    else:
+        form = RegisterUpdate(instance=request.user)
+
+    context = {
+        'form': form,
+   
+    }
+  
+    return render(request, 'registration/register_update.html', context)
+
+
 
 
 def loginView(request):

@@ -33,13 +33,11 @@
                         {% endif %}
                     </ul>
                 </div>
+                {% endfor %}
                 <div class="col-sm-12 col-md-8 profile-table">
                     <div class="w-100" >
                         <h3 class="text-primary text-center mb-3">Gifts</h3>
                     </div>
-
-                  
-
                     <table class="table text-center">
                         <thead>
                             <th class="text-primary">Name</th>
@@ -49,16 +47,17 @@
                             <th class="text-primary">Details</th>
                         </thead>
                         {% for i in gifts %}
+                        <tr>
+                            <td class="text-primary">{{ i.name }}</span></td>
+                            <td class="text-primary">{{ i.qty }}</span</td>
+                            <td class="text-primary">{{ i.description }}</span/td>
+                            <td class="text-primary">{{ i.store }}</span</td>
                             <tr>
-                                <td class="text-primary">{{ i.name }}</span></td>
-                                <td class="text-primary">{{ i.qty }}</span</td>
-                                <td class="text-primary">{{ i.description }}</span/td>
-                                <td class="text-primary">{{ i.store }}</span</td>
-                                <td>
-                                    <button type="button" class="btn btn-success  me-1" href="{% url 'profile' i.id %}"
-                                        data-bs-toggle="modal" data-bs-target="#profile{{i.id}}">
-                                        <i class="fa-solid fa-circle-info fa-md"></i>
-                                    </button>
+                            {% endfor %}
+                            <button type="button" class="btn btn-success me-1" href="{% url 'profile' i.id %}"
+                                data-bs-toggle="modal" data-bs-target="#profile{{i.id}}">
+                                <i class="fa-solid fa-circle-info fa-md"></i>
+                            </button>
                                     <!--  Modal -->
                                     <div class="modal" id="profile{{i.id}}" tabindex="-1" aria-labelledby="myModalLable1"
                                         aria-hidden="true">
@@ -98,7 +97,7 @@
                                 </td>
                                 <!-- End Modal -->
                             </tr>
-                        {% endfor %}
+                        
                     </table>
                         <br>
                     <hr>
@@ -115,7 +114,7 @@
                     </div>
                 </div>
             </div>
-        {% endfor %}
+       
     </div>
 </body>
 {% endblock %}
