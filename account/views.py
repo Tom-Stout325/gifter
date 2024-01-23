@@ -20,36 +20,43 @@ class RegisterUser(CreateView):
     success_url = reverse_lazy('login')
 
 
+
 class RegisterUpdate(LoginRequiredMixin, UpdateView):
+    model = Account
     form_class = RegisterUpdate
     template_name = 'registration/register_update.html'
     success_url = reverse_lazy('myProfile')
 
     def get_object(self):
         return self.request.user
+    
+    def get_context_data(self, **kwargs):
+        update = super().get_context_data(**kwargs)
+        update['account'] = Account.objects.filter(account=self.get_object().pk)
+        return update
 
 
 
 
-@login_required(login_url='login')
-def registerUpdate(request, pk):
-    user = Account.objects.get(id=pk)
-    if request.method == 'POST':
-        form = RegisterUpdate(request.POST, instance=request.user)
+# @login_required(login_url='login')
+# def registerUpdate(request, pk):
+#     user = Account.objects.get(id=pk)
+#     if request.method == 'POST':
+#         form = RegisterUpdate(request.POST, instance=request.user)
        
-        if form.is_valid():
-            form.save()
-            messages.success(request, f'Your account has been updated!')
-            return redirect('myProfile')
-    else:
-        form = RegisterUpdate(instance=request.user)
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request, f'Your account has been updated!')
+#             return redirect('myProfile')
+#     else:
+#         form = RegisterUpdate(instance=request.user)
 
-    context = {
-        'form': form,
+#     context = {
+#         'form': form,
    
-    }
+#     }
   
-    return render(request, 'registration/register_update.html', context)
+#     return render(request, 'registration/register_update.html', context)
 
 
 

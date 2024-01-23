@@ -2,17 +2,14 @@
 {% load static %}
 
 {% block title %}
-    Profiles
+Profiles
 {% endblock %}
 
 
 {% block content %}
-
-
-<div class="container">
-    <h2 class="text-center text-success mt-5 mb-5">All Profiles</h2>
-
-    <div class="col-sm-10">
+    <div class="container">
+        <h2 class="text-center text-success mt-5 mb-5">All Profiles</h2>
+        <div class="col-sm-10">
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -26,9 +23,12 @@
                     {% for i in profiles %}
                     <tr>
                         <td>{{ i.first_name }} {{ i.last_name }}</td>
-                
                         <td>{{ i.birthday }}</td>
-                        <td>{{ i.anniversary }}</td>
+                        {% if i.anniversary %}
+                            <td>{{ i.anniversary }}</td>
+                        {% else %}
+                            <td><p class="d-none">None</p></td>
+                        {% endif %}
                         <td>
                             <a type="submit" class="btn btn-success" href="{% url 'profile' i.id %}">
                                 <i class="fa-solid fa-circle-info fa-md"></i>
@@ -40,6 +40,4 @@
             </table>
         </div>
     </div>
-</div>
-
 {% endblock %}

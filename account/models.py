@@ -34,17 +34,6 @@ class MyAccountManager(BaseUserManager):
     def get_by_natural_key(self, username):
         return self.get(username=username)
 
-FAMILY = [
-   ("Jamie", "Jamie"),
-   ("Tom", "Tom & Leslie"),
-   ("Jonielle", "Jonielle"),
-   ("Mary", "Mike & Mary"),
-   ("Tim", "Tim & Emily"),
-   ("Anthony", "Anthony & Erica"),
-   ("Jeremy", "Jeremy & Kiara"),
-   ("Scotty", "Scotty & Desiree"),
-   ("Elizabeth", "Elizabeth"),
-]
 
 
 class Account(AbstractBaseUser, PermissionsMixin):
