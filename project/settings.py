@@ -33,6 +33,8 @@ INSTALLED_APPS = [
     'gifter.apps.GifterConfig',
     'account.apps.AccountConfig',
     
+    'crispy_forms',
+    "crispy_bootstrap5",
     'bootstrap5',
     'fontawesomefree',
     "whitenoise.runserver_nostatic",
@@ -132,6 +134,11 @@ LOGIN_REDIRECT_URL = 'myProfile'
 LOGOUT_REDIRECT_URL = 'home'
 
 LOGIN_URL = 'login'
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
 
 JAZZMIN_SETTINGS = {
     'site_title': "Gifter",

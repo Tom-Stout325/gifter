@@ -1,6 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from gifter.models import *
 from .models import *
 
@@ -24,7 +23,8 @@ class RegisterForm(UserCreationForm):
 
 
 
-class RegisterUpdate(forms.ModelForm):
+class RegisterUpdate(UserChangeForm):
+	password = None
 	email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control', 'type': 'email'}))
 	username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
 	first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
@@ -38,6 +38,8 @@ class RegisterUpdate(forms.ModelForm):
 		model = Account
 		fields = ('email', 'username', 'first_name', 'last_name', 'family', 'birthday', 'anniversary', 'profile_image' )
 			
+	def __init__(self, *args, **kwargs):
+		super(RegisterUpdate, self).__init__(*args, **kwargs)
 
 class LoginForm(AuthenticationForm):
 	username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))

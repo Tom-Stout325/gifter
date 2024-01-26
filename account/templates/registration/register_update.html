@@ -1,98 +1,38 @@
 {% extends 'index.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block title %}
-Register
+	Update Registration
 {% endblock %}
 
+
 {% block content %}
-
-
-{% if user.is_authenticated %}
-<h1>You are already signed in.</h1>
-{% else %}
-
-<div class="form-group" id="register-form">
-	<h2 class="text-center">Please Register</h2>
-    <form method='POST' enctype="multipart/form-data">
-		{% csrf_token %}
-		<hr>
-		<div class="row">
-			<div class="col-sm-12 mt-5">
-				<div class="form-group">
-					<div class="row">
-						<div class="col-sm-12 col-md-4">
-							<label class="small mb-1">First Name:</label>
-							<input type="text" class="form-control mb-3"/>
+	<div class="form-group" id="register-form">
+		<h2 class="text-center">Update Your Information</h2>
+		<div class="container">
+			<div class="w-75 mx-auto">
+				<form method='POST' enctype="multipart/form-data">
+					{% csrf_token %}
+					<hr>
+					{{ form|crispy }}
+					<button class="btn btn-primary w-100 mb-3">Submit</button>
+					
+					{% for field in registration_form %}
+						<p> {% for error in field.errors %}
+						<p style="color: red">{{ error }}</p>
+					{% endfor %}
+						</p>
+					{% endfor %}							
+						
+					{% if registration_form.non_field_errors %}
+						<div style="color: red">
+							<p>{{registration_form.non_field_errors}}</p>
 						</div>
-						<br>
-						<div class="col-sm-12 col-md-4">
-							<label class="small mb-1">Last Name:</label>
-							<input type="text" class="form-control" name='username' />
-						</div>
-
-						<div class="col-sm-12 col-md-4">
-							<label class="small mb-1">Family:</label>
-							<input type="text" class="form-control" name='username' />
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-sm-12 col-md-5" class="small mb-1">
-							<label for="inputEmail">Email:</label>
-							<input type="email" class="form-control small mb-3" id="inputEmail">
-						</div>
-						<br>
-						<div class="col-sm-12 col-md-5">
-							<label for="username" class="small mb-1">Username:</label>
-							<input type="text" class="form-control mb-3" name='username' />
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-sm-12 col-md-5" class="small mb-1">
-							<label for="inputBirthday">Birthday:</label>
-							<input type="date" class="form-control small mb-3" id="inputBirthday">
-						</div>
-						<br>
-						<div class="col-sm-12 col-md-5">
-							<label for="anniversary" class="small mb-1">Anniversary:</label>
-							<input type="date" class="form-control mb-5" name='username' />
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-sm-12 col-md-5" class="small mb-1">
-							<label for="inputBirthday">Profile Image:</label>
-							<input type="file" class="form-control small mb-5" id="inputImage">
-						</div>
-						<br>
-					</div>
-				</div>
+					{% endif %}
+				</form>
 			</div>
 		</div>
-		<button class="btn btn-primary w-100 mb-3">Submit</button>
-	</form>
-</div>
-
-
-	{% for field in registration_form %}
-	<p>
-		{% for error in field.errors %}
-			<p style="color: red">{{ error }}</p>
-		{% endfor %}
-	</p>
-	{% endfor %}
-
-	{% if registration_form.non_field_errors %}
-		<div style="color: red">
-			<p>{{registration_form.non_field_errors}}</p>
-		</div>
-	{% endif %}
-{% endif %}
-</form>
-</div>
-<p class="text-center mt-3">Already have an account? <span><a href="{% url 'login' %}">Login</a></span></p>
-
-
+	</div>
+	<p class="text-center mt-3">Already have an account? <span><a href="{% url 'login' %}">Login</a></span></p>
 {% endblock %}

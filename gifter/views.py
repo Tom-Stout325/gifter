@@ -1,25 +1,14 @@
-from typing import Any
 from django.db.models.base import Model as Model
-from django.db.models.query import QuerySet
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.forms import UserChangeForm, UserCreationForm
+from django.shortcuts import render, redirect
 from django.views.generic.list import ListView
-from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.urls import reverse_lazy, reverse
+from django.views.generic.edit import DeleteView
+from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login, logout
-from django.contrib import auth, messages
-from django.utils.decorators import method_decorator
+from django.contrib import messages
+from account.models import *
 from .models import *
-from account.models import *
 from .forms import *
-from account.models import *
-from django.contrib.auth import update_session_auth_hash
-from django.views import View
-
 
 
 
@@ -40,7 +29,6 @@ def profile(request, pk):
         'hobby': hobby,
         'giftDtl': giftDtl,
     }
-    
     return render(request, 'gifter/profile.html', context)
 
 
@@ -76,8 +64,6 @@ def family(request, pk):
     return render(request, 'gifter/family.html', context)
 
 
-
-
 @login_required(login_url='login')
 def addGift(request):
     if request.method == 'POST':
@@ -89,7 +75,6 @@ def addGift(request):
             return redirect("home")
     else:
         form = GiftForm()
-
     return render(request, 'components/gift_add.html', {"form": form})
 
 
@@ -99,7 +84,6 @@ def giftDetail(request, pk):
         'gift': gift,
     }
     return render(request, 'components/gift_detail.html', context)
-
 
 
 @login_required(login_url='login')
@@ -120,7 +104,6 @@ def giftUpdate(request, pk):
     return render(request, 'components/gift_update.html', {"form": form})
 
 
-
 class DeleteGift(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 	model = Gift
 	template_name = 'components/gift_delete.html'
@@ -129,7 +112,6 @@ class DeleteGift(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 	def test_func(self):
 		gift = Gift.objects.get(id=self.kwargs.get('pk'))
 		return self.request.user.id == gift.user.id
-
 
 
 @login_required(login_url='login')
@@ -170,8 +152,6 @@ def hobbyUpdate(request, pk):
         }
         return render(request, 'components/hobby_update.html', context)
     return render(request, 'components/hobby_update.html', {"form": form})
-
-
 
 
 class DeleteHobby(LoginRequiredMixin, UserPassesTestMixin, DeleteView):

@@ -4,6 +4,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.base import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponseRedirect
 from django.conf import settings
 from django.contrib import messages
@@ -21,44 +22,42 @@ class RegisterUser(CreateView):
 
 
 
-class RegisterUpdate(LoginRequiredMixin, UpdateView):
-    model = Account
+def registerUpdate(request, pk):
+    user = Account.objects.get(id=pk)
+
+    if request.method == 'POST':
+        form = RegisterUpdate(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Your profile has been updated.')
+            context = {
+                'form': form,
+            }
+            return redirect('myProfile', context)
+    else:
+        form = RegisterUpdate(request.POST, request.FILES, instance=request.user)
+        context = {
+                'form': form,
+            }
+        return render(request, 'registration/register_update.html', context)
+
+
+class RegisterUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     form_class = RegisterUpdate
-    template_name = 'registration/register_update.html'
+    login_url = 'login'
+    template_name = "registration/register_update.html"
     success_url = reverse_lazy('myProfile')
+    success_message = "User updated"
 
     def get_object(self):
         return self.request.user
-    
-    def get_context_data(self, **kwargs):
-        update = super().get_context_data(**kwargs)
-        update['account'] = Account.objects.filter(account=self.get_object().pk)
-        return update
 
+    def form_invalid(self, form):
+        messages.add_message(self.request, messages.ERROR, "Errors")
+        return redirect('myProfile')
 
-
-
-# @login_required(login_url='login')
-# def registerUpdate(request, pk):
-#     user = Account.objects.get(id=pk)
-#     if request.method == 'POST':
-#         form = RegisterUpdate(request.POST, instance=request.user)
-       
-#         if form.is_valid():
-#             form.save()
-#             messages.success(request, f'Your account has been updated!')
-#             return redirect('myProfile')
-#     else:
-#         form = RegisterUpdate(instance=request.user)
-
-#     context = {
-#         'form': form,
-   
-#     }
-  
-#     return render(request, 'registration/register_update.html', context)
-
-
+        
+	
 
 
 def loginView(request):
@@ -68,8 +67,6 @@ def loginView(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
-          
-   
             return redirect('home')
         else:
             messages.error(request, 'Invalid login')
@@ -80,25 +77,3 @@ def logoutView(request):
 	logout(request)
 	return redirect("home")
 
-
-
-
-
-
-
-
-
-def account_view(request, *args, **kwargs):
-	context = {}
-	user_id = kwargs.get("user_id")
-	try:
-		account = Account.objects.get(pk=user_id)
-	except:
-		return HttpResponse("No user found.")
-	if account:
-		context['id'] = account.id
-		context['username'] = account.username
-		context['email'] = account.email
-		context['profile_image'] = account.profile_image.url
-			
-		return render(request, "account/account.html", context)
