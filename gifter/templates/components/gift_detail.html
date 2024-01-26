@@ -34,25 +34,25 @@
                 <br><br><br>
             </div>   
         </div>
-        <div class="col-sm-11 col-md-4 details">
+        <div class="col-sm-11 col-md-5 details">
             <h3 class="text-center text-success">Gift Details</h3>
-            <h5>Quantity:&nbsp; {{ gift.qty }}</h5>
+            <p class="text-muted">Quantity:&nbsp; <span class="text-success">{{ gift.qty }}</span> </p>
 
             {% if gift.color %}
-                <h5>Color:&nbsp; {{ gift.color }}</h5>
+                <h 5class="text-muted">Color:&nbsp; <span class="text-success">{{ gift.color }}</p>
             {% endif %}
 
             {% if gift.size %}
-                <h5>Size:&nbsp; {{ giftsize }}</h5>
+                <p class="text-muted">Size:&nbsp; <span class="text-success">{{ gift.size }}</p>
             {% endif %}
 
-            <h5>Store:&nbsp; {{ gift.store }}</h5>     
-            <h5>Description:&nbsp; {{ gift.description }}</h5>
-            <h5 class="text-muted">Updated on:&nbsp; {{ gift.updated }}</h5>
+            <p class="text-muted">Store:&nbsp; <span class="text-success">{{ gift.store }}</p>     
+            <p class="text-muted">Description:&nbsp; <span class="text-success">{{ gift.description }}</p>
+            <p class="text-muted">Updated on:&nbsp; <span class="text-success">{{ gift.updated }}</p>
         </div>
     </div>
     <div class="container text-center mt-4 mb-4">    
-        <a class="btn btn-primary btn-lg" href="{% url 'profiles' %}">Go Back</a>
+        <a class="btn btn-primary btn-lg" href="{% url 'myProfile' gift.user_id %}">Go Back</a>
     </div>
 </div>
 {% endblock %}

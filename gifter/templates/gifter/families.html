@@ -19,22 +19,11 @@
                 <h5 class="card-title text-center text-success">{{ i.name }}</h5>
             </div>
             <div class="card-body d-grid gap-2">
-                <span class="tips card-body d-grid gap-2" 
-                    data-bs-toggle="tooltip"
-                    data-bs-placement="right" 
-                    title="Please log in to view family members!">
                 <a href="{% url 'family' i.id %}" class="card-link btn btn-outline-primary btn-block mb-4">Family Page</a></span>
                 <br>
             </div>
         </div>
         {% endfor %}
     </div>
-   
-    <script>
-        const tooltips = document.querySelectorAll('.tips')
-        tooltips.forEach(t => {
-            new bootstrap.Tooltip(t)
-        })
-    </script>
 </body>
 {% endblock %}

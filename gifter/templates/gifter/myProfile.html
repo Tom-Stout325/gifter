@@ -12,30 +12,41 @@
   
     <div class="container text-center mb-3">
         <h1 class="text-primary">My Profile</h1>
+        <div class="row">
+            <div class="col-sm-12 col-md-6 my-3">
+                <a href="{% url 'addGift' %}" class="btn btn-outline-primary btn-lg">Add A Gift</a>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <a href="{% url 'addHobby' %}" class="btn btn-outline-primary btn-lg">Add A Hobby</a>
+            </div>
+        </div>
+    </div>
     </div>
     <br>
     <div class="container">
         <div class="row">
             <div class="card col-sm-12 col-md-3" id="profile-card" style="width: 18rem;">
                 {% if account.profile_image %}
-                <img src="{{ MEDIA_URL}}{{ account.profile_image.url }}" class="card-img-top p-3" alt="avatar">
+                    <img src="{{ MEDIA_URL}}{{ account.profile_image.url }}" class="card-img-top p-3" alt="avatar">
                 {% else %}
-                <img src="{% static 'images/default_user.png' %}" class="card-img-top p-3" alt="avatar">
+                    <img src="{% static 'images/default_user.png' %}" class="card-img-top p-3" alt="avatar">
                 {% endif %}
                 <div class="card-body">
                     <h5 class="card-title text-center text-primary">{{ account.first_name }} {{ account.last_name }}</h5>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Username: &nbsp;{{ account.username}}</li>
-                    <li class="list-group-item">Birthday: &nbsp; {{ account.birthday }}</li>
+                    <li class="list-group-item">Username: {{ account.username}}</li>
+                    <li class="list-group-item">Birthday:{{ account.birthday }}</li>
                     {% if user.anniversary %}
-                        <li class="list-group-item">Anniversary: &nbsp;{{ account.anniversary }}</li>
+                        <li class="list-group-item">Anniversary:{{ account.anniversary }}</li>
                     {% endif %}
-                    <li class="list-group-item">Family: &nbsp;<a href=""> {{ account.family}}</a></li>
+                    <li class="list-group-item">Family: &nbsp;<a href="{% url 'family' user.family_id %}"> {{ account.family}}</a></li>
                 </ul>
+
             </div>
            
             <div class="col-sm-12 col-md-8">
+
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item" role="presentation">
                         <a class="nav-link active" data-bs-toggle="tab" href="#wish" aria-selected="true"
@@ -55,15 +66,17 @@
                             <thead>
                                 <th class="text-primary">Name</th>
                                 <th class="text-primary">QTY</th>
-                                <th class="text-primary">Updated</th>
                                 <th class="text-primary">View</th>
+                                <th class="text-primary">Update</th>
+                                <th class="text-primary">Delete</th>
                             </thead>
                             {% for i in gifts %}
                             <tr>
                                 <td class="text-primary">{{ i.name }}</td>
-                                <td class="text-primary">{{ i.qty }}</td>
-                                <td class="text-primary">{{ i.updated }}</td>
-                                <td class="text-primary"><a href="" class="btn btn-outline-primary">View</a></td>
+                                <td class="text-primary text-center">{{ i.qty }}</td>
+                                <td><a href="{% url 'giftDetail' i.id %}" class="btn btn-outline-primary"><i class="fa-regular fa-eye"></i></a></td>
+                                <td><a href="{% url 'giftUpdate' i.id %}" class="btn btn-outline-primary mx-2"><i class="fa-regular fa-pen-to-square"></i></a></td>
+                                <td><a href="{% url 'giftDelete' i.id %}" class="btn btn-outline-danger mx-2"><i class="fa-regular fa-trash-can"></i></a></td>
                             </tr>
                             {% endfor %}
                         </table>
@@ -73,16 +86,16 @@
                             <br>
                             <div>
                                 {% for i in hobbies %}
-                                <li class="fs-5 text-primary">
-                                    <i class="fa-solid fa-hashtag"></i>
+                                    <li class="fs-5 text-primary">
+                                        <i class="fa-solid fa-hashtag"></i>
                                         {{ i.name }}
-                                    {% if i.description %}
-                                    <span class="text-justify">
-                                        : {{ i.description }}
-                                    </span>
-                                    {% endif %}
-                                </li>
-                                <hr class="w-50 text-primary">
+                                        {% if i.description %}
+                                            <span class="text-justify"> : {{ i.description }}</span>
+                                        {% endif %}
+                                    </li>
+                                    <li><a href="{% url 'hobbyUpdate' i.id %}"><i class="fa-regular fa-pen-to-square"></i>&nbsp; &nbsp;Update this Hobby</i></a></li>
+                                    <li><a href="{% url 'hobbyDelete' i.id %}"><i class="fa-regular fa-trash-can"></i>&nbsp; &nbsp;Delete this Hobby</a></li>
+                                    <hr class="w-50 text-primary">
                                 {% endfor %}
                             </div>
                             <br>
@@ -104,7 +117,7 @@
                                 <li class="text-primary fs-4">Family:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="fs-3 text-success">  {{ account.family }}</span></li>
                                 <li class="text-primary fs-4">Birthday:&nbsp;&nbsp;<span class="fs-3 text-success">  {{ account.birthday }}</span></li>
                                 <li class="text-primary fs-4">Anniversary:&nbsp;&nbsp;<span class="fs-3 text-success">  {{ account.anniversary }}</span></li>
-                                <li class="text-primary fs-4"> <a href="{% url 'update' user.id %}" class="btn btn-outline-primary btn-sm">Change</a></span></li>
+                                <li class="text-primary fs-4"> <a href="{% url 'update' user.id %}" class="btn btn-outline-primary btn-sm">Change Info</a></span></li>
                             </tr>
                       
                      

@@ -1,0 +1,21 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}
+    Update a Gift
+{% endblock %}
+
+
+{% block content %}
+    <h1 class="text-center text-success">Update your gift:  {{ gift.name }}</h1>
+    <div class="container">
+        <div class="col-sm-12 col-md-5 mx-auto">
+            <form action="" method="POST" enctype="multipart/form-data">
+                <hr>
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn btn-primary w-100">Submit</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}  

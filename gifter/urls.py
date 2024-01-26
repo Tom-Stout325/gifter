@@ -17,9 +17,15 @@ urlpatterns = [
     path('families/', Families.as_view(), name='families'),
     path('family/<str:pk>/', family, name='family'),
    
-
     path('gift/<str:pk>/', giftDetail, name='giftDetail'),
-    
+    path('add-gift', addGift, name='addGift'),
+    path('update-gift/<str:pk>', giftUpdate, name='giftUpdate'),
+    path('delete-gift/<str:pk>/', DeleteGift.as_view(), name='giftDelete'),
+
+    path('hobby/<str:pk>/', hobbyDetail, name='hobbyDetail'),
+    path('add-hobby', addHobby, name='addHobby'),
+    path('update-hobby/<str:pk>', hobbyUpdate, name='hobbyUpdate'),
+    path('delete-hobby/<str:pk>/', DeleteHobby.as_view(), name='hobbyDelete'),
 
     
 ]

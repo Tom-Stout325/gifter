@@ -29,7 +29,7 @@
                     {% if user.anniversary %}
                         <li class="list-group-item">Anniversary: &nbsp;{{ user.anniversary }}</li>
                     {% endif %}
-                    <li class="list-group-item">Family: &nbsp;<a href=""> {{ user.family}}</a></li>
+                    <li class="list-group-item">Family: &nbsp;<a href="{% url 'family' user.family_id %}"> {{ user.family}}</a></li>
                 </ul>
             </div>
         </div>
@@ -85,5 +85,8 @@
             </div>
         </div>
     </div> 
+    <div class="container text-center mt-4 mb-4">    
+        <a class="btn btn-primary btn-lg" href="{% url 'profiles' %}">Go Back</a>
+    </div>
 </body>
 {% endblock %}

@@ -16,9 +16,9 @@
         {% for i in users %}
             <div class="card m-3" id="card">
                 {% if i.profile_image %}
-                <img src="{{ MEDIA_URL}}{{ i.profile_image.url }}" class="card-img-top p-3" alt="avatar">
+                    <img src="{{ MEDIA_URL}}{{ i.profile_image.url }}"  id="card-img" alt="avatar">
                 {% else %}
-                <img src="{% static 'images/default_user.png' %}" class="card-img-top p-3" alt="avatar">
+                    <img src="{% static 'images/default_user.png' %}" class="card-img-top  p-3" alt="avatar">
                 {% endif%}
 
                 <div class="card-body d-grid gap-2">
@@ -30,7 +30,7 @@
             </div>
         {% endfor %}
     </div>
-
+   
     <script>
         const tooltips = document.querySelectorAll('.tips')
         tooltips.forEach(t => {

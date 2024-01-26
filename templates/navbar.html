@@ -32,26 +32,29 @@
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
             aria-expanded="false">Forms</a>
           <div class="dropdown-menu">
-
             <a class="dropdown-item" href="{% url 'update' user.id %}">Update Profile</a>
-            <a class="dropdown-item" href="">All Profiles</a>
-            {% if user.is_authenticated %}
+            <a class="dropdown-item" href="{% url 'addGift' %}">Add a Gift</a>
+            <a class="dropdown-item" href="">Add a Gift</a>
+         
             <div class="dropdown-divider"></div>
 
         <li class="nav-item"><a class="nav-link" href="http://127.0.0.1:8000/admin">Admin</a></li>
     </div>
-    {% endif %}
+  
     </li>
     </ul>
     <ul class="navbar-nav me-auto">
       {% if user.is_authenticated %}
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'logout' %}">Sign Out &nbsp; <i class="fa-solid fa-right-to-bracket"></i></a>
+        <a class="nav-link" href="{% url 'logout' %}">Sign Out &nbsp;<i class="fa-solid fa-right-to-bracket"></i>&nbsp;&nbsp;</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link mx-5" href="{% url 'profiles' %}">&nbsp;&nbsp; <i class="fa-regular fa-circle-user"></i>&nbsp;: {{ user.username }} &nbsp;&nbsp; &nbsp; &nbsp;</a>
       </li>
 
       {% else %}
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'login' %}">Sign In &nbsp; <i class="fa-solid fa-right-from-bracket"></i></a>
+        <a class="nav-link" href="{% url 'login' %}"> <i class="fa-solid fa-right-from-bracket"></i> &nbsp; Sign In &nbsp;</a>
       </li>
       {% endif %}
     </ul>
