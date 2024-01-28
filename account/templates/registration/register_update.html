@@ -6,7 +6,6 @@
 	Update Registration
 {% endblock %}
 
-
 {% block content %}
 	<div class="form-group" id="register-form">
 		<h2 class="text-center">Update Your Information</h2>
@@ -16,23 +15,14 @@
 					{% csrf_token %}
 					<hr>
 					{{ form|crispy }}
-					<button class="btn btn-primary w-100 mb-3">Submit</button>
-					
-					{% for field in registration_form %}
-						<p> {% for error in field.errors %}
-						<p style="color: red">{{ error }}</p>
-					{% endfor %}
-						</p>
-					{% endfor %}							
-						
-					{% if registration_form.non_field_errors %}
-						<div style="color: red">
-							<p>{{registration_form.non_field_errors}}</p>
-						</div>
-					{% endif %}
+					<div class="col-sm-12 col-md-4 w-75 mx-auto">
+						<button class="btn btn-primary w-100">Submit</button>
+					</div>
 				</form>
+				<div class="col-sm-12 col-md-4 w-75 mx-auto">
+					<a href="{% url 'myProfile' user.id %}" class="btn btn-primary w-100">Cancel</a>
+				</div>
 			</div>
 		</div>
 	</div>
-	<p class="text-center mt-3">Already have an account? <span><a href="{% url 'login' %}">Login</a></span></p>
 {% endblock %}

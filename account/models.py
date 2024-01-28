@@ -34,8 +34,6 @@ class MyAccountManager(BaseUserManager):
     def get_by_natural_key(self, username):
         return self.get(username=username)
 
-
-
 class Account(AbstractBaseUser, PermissionsMixin):
     email                   = models.EmailField(max_length=100, unique=True)
     username                = models.CharField(max_length=50, unique=True)

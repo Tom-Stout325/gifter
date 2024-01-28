@@ -2,57 +2,59 @@
 {% load static %}
 
 {% block title %}
-{{ gift.name}}
+    {{ gift.name }}
 {% endblock %}
 
 
 {% block content %}
-<body>
-    <div class="w-75 p-5 mx-auto"> 
-        <h1 class="text-center text-success">{{ gift.user.first_name }} {{ gift.user.last_name }}</h1>
-            <hr class="text-success">
-        <h3 class="text-success text-center mt-4">{{ gift.name }}</h3>
-    </div>      
-        <br>
-    <div class="row container mx-auto">
-        <div class="col-sm-12 col-md-3">
-            <div class="card">
-                <img src="{{ MEDIA_URL }}{{ gift.user.profile_image.url }}" alt="avatar">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Username: &nbsp; {{ gift.user.username }}</li>
-                    <li class="list-group-item">Birthday: {{ gift.user.birthday }}</li>
-                    {% if gift.user.anniversary %}
-                        <li class="list-group-item">Anniversary: &nbsp; {{ gift.user.anniversary }}</li>
-                    {% endif %}
-                </ul>
+    <body>
+        <div class="w-75 p-5 mx-auto"> 
+            <h1 class="text-center text-primary">{{ gift.user.first_name }} {{ gift.user.last_name }}</h1>
+                <hr class="text-primary">
+            <h3 class="text-primary text-center mt-4">{{ gift.name }}</h3>
+        </div>      
+            <br>
+        <div class="row container mx-auto">
+            <div class="col-sm-12 col-md-3">
+                <div class="card">
+                    <img src="{{ MEDIA_URL }}{{ gift.user.profile_image.url }}" alt="avatar">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Username: &nbsp; {{ gift.user.username }}</li>
+                        <li class="list-group-item">Birthday: {{ gift.user.birthday }}</li>
+                        {% if gift.user.anniversary %}
+                            <li class="list-group-item">Anniversary: &nbsp; {{ gift.user.anniversary }}</li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4 mx-auto">
+                    <br> <br>
+                <div class="text-center text-primary">
+                    {% if gift.image %}
+                        <img src="{{ MEDIA_URL }}{{ gift.image.url }}" alt="image" class="w-50">  
+                    {% else %}     
+                        <img src="{% static 'images/default_gift.png' %}" alt="image" class="w-50">   
+                    {% endif %}    
+                        <br><br><br>
+                </div>   
+            </div>
+            <div class="col-sm-11 col-md-5 details">
+                <h3 class="text-center text-primary">Gift Details</h3>
+                <p class="text-muted">Quantity:&nbsp; <span class="text-primary">{{ gift.qty }}</span> </p>
+
+                {% if gift.color %}
+                    <h 5class="text-muted">Color:&nbsp; <span class="text-primary">{{ gift.color }}</p>
+                {% endif %}
+                {% if gift.size %}
+                    <p class="text-muted">Size:&nbsp; <span class="text-primary">{{ gift.size }}</p>
+                {% endif %}
+                <p class="text-muted">Store:&nbsp; <span class="text-primary">{{ gift.store }}</p>     
+                <p class="text-muted">Description:&nbsp; <span class="text-primary">{{ gift.description }}</p>
+                <p class="text-muted">Updated on:&nbsp; <span class="text-primary">{{ gift.updated }}</p>
             </div>
         </div>
-        <div class="col-sm-12 col-md-4 mx-auto">
-                <br> <br>
-            <div class="text-center text-success">
-                <img src="{{ MEDIA_URL }}{{ gift.image.url }}" alt="avatar" class="w-50">               
-                <br><br><br>
-            </div>   
+        <div class="container text-center mt-4 mb-4">    
+            <a class="btn btn-primary btn-lg" href="{% url 'myProfile' gift.user_id %}">Go Back</a>
         </div>
-        <div class="col-sm-11 col-md-5 details">
-            <h3 class="text-center text-success">Gift Details</h3>
-            <p class="text-muted">Quantity:&nbsp; <span class="text-success">{{ gift.qty }}</span> </p>
-
-            {% if gift.color %}
-                <h 5class="text-muted">Color:&nbsp; <span class="text-success">{{ gift.color }}</p>
-            {% endif %}
-
-            {% if gift.size %}
-                <p class="text-muted">Size:&nbsp; <span class="text-success">{{ gift.size }}</p>
-            {% endif %}
-
-            <p class="text-muted">Store:&nbsp; <span class="text-success">{{ gift.store }}</p>     
-            <p class="text-muted">Description:&nbsp; <span class="text-success">{{ gift.description }}</p>
-            <p class="text-muted">Updated on:&nbsp; <span class="text-success">{{ gift.updated }}</p>
-        </div>
-    </div>
-    <div class="container text-center mt-4 mb-4">    
-        <a class="btn btn-primary btn-lg" href="{% url 'myProfile' gift.user_id %}">Go Back</a>
-    </div>
-</div>
+    </body>
 {% endblock %}

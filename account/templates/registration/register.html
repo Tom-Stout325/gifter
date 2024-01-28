@@ -1,42 +1,28 @@
 {% extends 'index.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block title %}
 	Register
 {% endblock %}
 
 {% block content %}
-
-<div class="container">
-	{% if user.is_authenticated %}
-		<h1>You are already signed in.</h1>
-	{% else %}
-	<div class="form-group col-sm-12 col-md-6" id="register-form">
-		<h2 class="text-center">Please Register</h2>
-		<form method='POST' enctype="multipart/form-data">
-			{% csrf_token %}
-			<hr>
-			{{ form.as_p }}
-			<button class="btn btn-primary w-100 mb-3">Submit</button>
-		</form>
-	</div>
-	{% for field in registration_form %}
-		<p>
-		{% for error in field.errors %}
-			<p style="color: red">{{ error }}</p>
-		{% endfor %}
-		</p>
-	{% endfor %}
-
-	{% if registration_form.non_field_errors %}
-		<div style="color: red">
-			<p>{{registration_form.non_field_errors}}</p>
-		</div>
+	<div class="container">
+		{% if user.is_authenticated %}
+			<h1>You are already registered.</h1>
+		{% else %}
+			<div class="form-group col-sm-12 col-md-6" id="register-form">
+				<h2 class="text-center">Please Register</h2>
+				<form method='POST' enctype="multipart/form-data">
+					{% csrf_token %}
+					<hr>
+					{{ form|crispy }}
+					<button class="btn btn-primary w-100 mb-3">Submit</button>
+				</form>
+			</div>
 		{% endif %}
-	{% endif %}		
-
-</div>
-	<p class="text-center mt-3">Already have an account? <span><a href="{% url 'login' %}">Login</a></span></p>
-</div>
-
+	</div>
+	<div>
+		<p class="text-center mt-3">Already have an account? <span><a href="{% url 'login' %}">Login</a></span></p>
+	</div>
 {% endblock %}

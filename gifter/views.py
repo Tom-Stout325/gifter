@@ -8,6 +8,7 @@ from .models import *
 from .forms import *
 
 
+#=-=-=-=-=-=-=-=-=-=-=-=-=->  P R O F I L E   V I E W S  <-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=#
 
 class Profiles(ListView):
     model = Account
@@ -44,6 +45,8 @@ def myProfile(request, pk):
     return render(request, 'gifter/myProfile.html', context)
 
 
+#=-=-=-=-=-=-=-=-=-=-=-=-=->  F A M I L Y   V I E W S  <-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=#
+
 class Families(ListView):
     model = Family
     template_name = 'gifter/families.html'
@@ -59,6 +62,8 @@ def family(request, pk):
     }
     return render(request, 'gifter/family.html', context)
 
+
+#=-=-=-=-=-=-=-=-=-=-=-=-=->  G I F T  V I E W S  <-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=#
 
 @login_required(login_url='login')
 def addGift(request):
@@ -86,18 +91,19 @@ def giftDetail(request, pk):
 def giftUpdate(request, pk):
     gift = Gift.objects.get(id=pk)
     form = GiftForm(instance=gift)
+    context = {
+            'form': form,
+            'gift': gift,
+        }
     if request.method == 'POST':
-        form = GiftForm(request.POST, instance = gift)
+        form = GiftForm(request.POST, request.FILES, instance=gift)
         if form.is_valid():
             form.save()
             messages.success(request, 'Your hobby has been updated') 
             return redirect(f'/my-profile/{gift.user_id}')
-        context = {
-            'form': form,
-            'gift': gift,
-        }
+   
         return render(request, 'components/gift_update.html', context)
-    return render(request, 'components/gift_update.html', {"form": form})
+    return render(request, 'components/gift_update.html', context)
 
 
 @login_required(login_url='login')
@@ -112,7 +118,9 @@ def deleteGift(request, pk):
      }
 
     return render(request, 'components/gift_delete.html', context)
-    
+
+
+#=-=-=-=-=-=-=-=-=-=-=-=-=->  H O B B Y  V I E W S  <-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=#
 
 @login_required(login_url='login')
 def addHobby(request):
@@ -124,6 +132,7 @@ def addHobby(request):
             hobby.save()
             return redirect(f'/my-profile/{hobby.user_id}')
     else:
+       
         form = HobbyForm()
     return render(request, 'components/hobby_add.html', {"form": form})
 
@@ -140,19 +149,19 @@ def hobbyDetail(request, pk):
 def hobbyUpdate(request, pk):
     hobby = Hobby.objects.get(id=pk)
     form = HobbyForm(instance=hobby)
+    context = {
+        'form': form,
+        'hobby': hobby, 
+        }
     if request.method == 'POST':
         form = HobbyForm(request.POST, instance = hobby)
-      
         if form.is_valid():
             form.save()
             messages.success(request, 'Your hobby has been updated') 
             return redirect(f'/my-profile/{hobby.user_id}')
-        context = {
-            'form': form,
-            'hobby': hobby, 
-        }
+
         return render(request, 'components/hobby_update.html', context)
-    return render(request, 'components/hobby_update.html', {"form": form})
+    return render(request, 'components/hobby_update.html', context)
 
 
 @login_required(login_url='login')
@@ -171,6 +180,7 @@ def deleteHobby(request, pk):
 
 
 
+#=-=-=-=-=-=-=-=-=-=-=-=-=-> P A G E   V I E W S <-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=#
 
 def AboutPage(request):
     return render(request,'gifter/about.html')
@@ -182,6 +192,5 @@ def HomePage(request):
     return render(request,'gifter/home.html')
 
 
-#=-=-=-=-=-=-=-=-=-=-=-=-=->  NOT USED <-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=#
 
 

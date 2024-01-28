@@ -2,20 +2,31 @@
 {% load static %}
 
 {% block title %}
-    Update a hobby 
+    Update {{ hobby.name }} 
 {% endblock %}
 
 
 {% block content %}
-    <h1 class="text-center text-success">Update Your Hobby</h1>
     <div class="container">
-        <div class="col-sm-12 col-md-5 mx-auto">
-            <form action="" method="POST" enctype="multipart/form-data">
-                <hr>
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button class="btn btn-primary w-100">Submit</button>
-            </form>
-        </div>
+        <h1 class="text-center text-primary">Updating:</h1>
+            <br>
+        <h1 class="text-center text-success">{{ hobby.name }}</h1>
+            <br>
     </div>
-{% endblock %} 
+            <hr>
+        <div class="container">
+            <div class="col-sm-12 col-md-5 mx-auto">
+                <form action="" method="POST" enctype="multipart/form-data">
+                    <hr>
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="col-sm-12 col-md-4 w-75 mx-auto">
+                        <button class="btn btn-primary w-100">Submit</button>
+                    </div>
+                </form>
+                <div class="col-sm-12 col-md-4 w-75 mx-auto">
+                    <a href="{% url 'myProfile' user.id %}" class="btn btn-primary w-100">Cancel</a>
+                </div>
+            </div>
+        </div>
+{% endblock %}

@@ -22,8 +22,7 @@ class RegisterForm(UserCreationForm):
 		fields = ('email', 'username', 'first_name', 'last_name', 'family', 'birthday', 'anniversary', 'profile_image', 'password1', 'password2', )
 
 
-
-class RegisterUpdate(UserChangeForm):
+class RegisterUpdate(forms.ModelForm):
 	password = None
 	email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control', 'type': 'email'}))
 	username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
@@ -40,6 +39,7 @@ class RegisterUpdate(UserChangeForm):
 			
 	def __init__(self, *args, **kwargs):
 		super(RegisterUpdate, self).__init__(*args, **kwargs)
+
 
 class LoginForm(AuthenticationForm):
 	username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
