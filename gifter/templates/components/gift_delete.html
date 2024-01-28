@@ -19,7 +19,7 @@
                 {% csrf_token %}
                 <button class="btn btn-danger w-100" type="submit">YES - DELETE</button>
             </form>
-            <a href="{% url 'home' %}" class="btn btn-primary w-100" type="submit">No - Go Back</a>
+            <a href="{% url 'myProfile' gift.user_id %}" class="btn btn-primary w-100" type="submit">No - Go Back</a>
         </div>
     </div>
 {% endblock %}

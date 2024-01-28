@@ -1,12 +1,9 @@
 from django.db.models.base import Model as Model
 from django.shortcuts import render, redirect
 from django.views.generic.list import ListView
-from django.views.generic.edit import DeleteView
-from django.urls import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from account.models import *
+from account.models import Account
 from .models import *
 from .forms import *
 
@@ -44,7 +41,6 @@ def myProfile(request, pk):
         'hobbies': hobbies,
         'account': account,
     }
-    print(user)
     return render(request, 'gifter/myProfile.html', context)
 
 
@@ -72,7 +68,7 @@ def addGift(request):
             gift = form.save(commit=False)
             gift.user = request.user
             gift.save()
-            return redirect("home")
+            return redirect(f'/my-profile/{gift.user_id}')
     else:
         form = GiftForm()
     return render(request, 'components/gift_add.html', {"form": form})
@@ -94,8 +90,8 @@ def giftUpdate(request, pk):
         form = GiftForm(request.POST, instance = gift)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Your gift has been updated') 
-            return redirect('myProfile')
+            messages.success(request, 'Your hobby has been updated') 
+            return redirect(f'/my-profile/{gift.user_id}')
         context = {
             'form': form,
             'gift': gift,
@@ -104,15 +100,19 @@ def giftUpdate(request, pk):
     return render(request, 'components/gift_update.html', {"form": form})
 
 
-class DeleteGift(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-	model = Gift
-	template_name = 'components/gift_delete.html'
-	success_url = reverse_lazy('home')
+@login_required(login_url='login')
+def deleteGift(request, pk):
+    gift = Gift.objects.get(id=pk)
+    if request.method == 'POST':
+        gift.delete()
+        messages.success(request, f'Successfully deleted from your Wish List.') 
+        return redirect(f'/my-profile/{gift.user_id}')
+    context = {
+        'gift': gift,
+     }
 
-	def test_func(self):
-		gift = Gift.objects.get(id=self.kwargs.get('pk'))
-		return self.request.user.id == gift.user.id
-
+    return render(request, 'components/gift_delete.html', context)
+    
 
 @login_required(login_url='login')
 def addHobby(request):
@@ -122,7 +122,7 @@ def addHobby(request):
             hobby = form.save(commit=False)
             hobby.user = request.user
             hobby.save()
-            return redirect("home")
+            return redirect(f'/my-profile/{hobby.user_id}')
     else:
         form = HobbyForm()
     return render(request, 'components/hobby_add.html', {"form": form})
@@ -142,26 +142,34 @@ def hobbyUpdate(request, pk):
     form = HobbyForm(instance=hobby)
     if request.method == 'POST':
         form = HobbyForm(request.POST, instance = hobby)
+      
         if form.is_valid():
             form.save()
             messages.success(request, 'Your hobby has been updated') 
-            return redirect('home')
+            return redirect(f'/my-profile/{hobby.user_id}')
         context = {
             'form': form,
-            'hobby': hobby,
+            'hobby': hobby, 
         }
         return render(request, 'components/hobby_update.html', context)
     return render(request, 'components/hobby_update.html', {"form": form})
 
 
-class DeleteHobby(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-	model = Hobby
-	template_name = 'components/hobby_delete.html'
-	success_url = reverse_lazy('home')
+@login_required(login_url='login')
+def deleteHobby(request, pk):
+    hobby = Hobby.objects.get(id=pk)
+    if request.method == 'POST':
+        hobby.delete()
+        messages.success(request, 'Your hobby was deleted successfully.') 
+        return redirect(f'/my-profile/{hobby.user_id}')
+    context = {
+        'hobby': hobby,
+     }
+    return render(request, 'components/hobby_delete.html', context)
+    
 
-	def test_func(self):
-		hobby = Hobby.objects.get(id=self.kwargs.get('pk'))
-		return self.request.user.id == hobby.user.id
+
+
 
 
 def AboutPage(request):

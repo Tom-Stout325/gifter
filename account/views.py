@@ -1,15 +1,12 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from django.contrib.auth import login, logout, authenticate
-from django.views.generic.edit import CreateView, UpdateView
-from django.views.generic.base import TemplateView
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.messages.views import SuccessMessageMixin
-from django.http import HttpResponseRedirect
-from django.conf import settings
 from django.contrib import messages
-from django.urls import reverse_lazy
+from django.http import HttpResponse
+from django.views.generic.edit import CreateView, UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.messages.views import SuccessMessageMixin
+from django.urls import reverse_lazy
 from .forms import *
 from .models import Account
 from django.contrib.auth.models import User
@@ -57,7 +54,6 @@ class RegisterUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
         return redirect('myProfile')
 
         
-	
 
 
 def loginView(request):
@@ -66,14 +62,20 @@ def loginView(request):
         password = request.POST.get('password')
         user = authenticate(username=username, password=password)
         if user is not None:
-            login(request, user)
-            return redirect('home')
+            if user.is_active:
+                login(request, user)
+                messages.success(request, f'{ user.username} has been logged in.')
+                return redirect(f'/my-profile/{user.id}')
+            else:
+                messages.error(request, 'Account is not active, please contact the administrator')
+                return render(request, 'login')
         else:
-            messages.error(request, 'Invalid login')
+            messages.success(request, "Invalid login")
     return render(request, 'registration/login.html', {'form': LoginForm})
 
 
 def logoutView(request):
-	logout(request)
-	return redirect("home")
+    logout(request)
+    messages.success(request, 'You have logged out.')
+    return redirect('home')
 

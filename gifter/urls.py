@@ -20,12 +20,12 @@ urlpatterns = [
     path('gift/<str:pk>/', giftDetail, name='giftDetail'),
     path('add-gift', addGift, name='addGift'),
     path('update-gift/<str:pk>', giftUpdate, name='giftUpdate'),
-    path('delete-gift/<str:pk>/', DeleteGift.as_view(), name='giftDelete'),
+    path('delete-gift/<str:pk>/', deleteGift, name='giftDelete'),
 
     path('hobby/<str:pk>/', hobbyDetail, name='hobbyDetail'),
-    path('add-hobby', addHobby, name='addHobby'),
+    path('add-hobby/', addHobby, name='addHobby'),
     path('update-hobby/<str:pk>', hobbyUpdate, name='hobbyUpdate'),
-    path('delete-hobby/<str:pk>/', DeleteHobby.as_view(), name='hobbyDelete'),
+    path('delete-hobby/<str:pk>/', deleteHobby, name='hobbyDelete'),
 
     
 ]

@@ -3,6 +3,8 @@ import os
 import environ
 import secrets
 
+from django.contrib import messages
+
 
 
 env = environ.Env()
@@ -114,6 +116,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 #_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-  CUSTOM SETTINGS
+
+MESSAGE_TAGS = {
+    messages.DEBUG: 'alert-info',
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger',
+}
 
 AUTH_USER_MODEL = 'account.Account'
 

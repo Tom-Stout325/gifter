@@ -26,12 +26,19 @@
     <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
 </head>
-{% for message in messages %}
-{{ messages }}
-{% endfor %}
+
 
 <body>
     {% include 'navbar.html' %}
+    <br>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-dismissible {{ message.tags }} w-75 mx-auto">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <p class="mb-0">{{ message }} <a href="#" class="alert-link"></a></p>
+            </div>
+        {% endfor %}
+    {% endif %}
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-6 text-center mb-4 mt-5">
