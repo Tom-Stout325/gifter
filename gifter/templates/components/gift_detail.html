@@ -38,6 +38,7 @@
                         <br><br><br>
                 </div>   
             </div>
+
             <div class="col-sm-11 col-md-5 details">
                 <h3 class="text-center text-primary">Gift Details</h3>
                 <p class="text-muted">Quantity:&nbsp; <span class="text-primary">{{ gift.qty }}</span> </p>
@@ -45,16 +46,40 @@
                 {% if gift.color %}
                     <h 5class="text-muted">Color:&nbsp; <span class="text-primary">{{ gift.color }}</p>
                 {% endif %}
+
                 {% if gift.size %}
                     <p class="text-muted">Size:&nbsp; <span class="text-primary">{{ gift.size }}</p>
                 {% endif %}
+
                 <p class="text-muted">Store:&nbsp; <span class="text-primary">{{ gift.store }}</p>     
                 <p class="text-muted">Description:&nbsp; <span class="text-primary">{{ gift.description }}</p>
                 <p class="text-muted">Updated on:&nbsp; <span class="text-primary">{{ gift.updated }}</p>
+                <br>
+        
+                
+                {% if user.is_authenticated %}
+                    {% if not gift.purchased %}
+                        <h4 class="text-danger"><i class="fa-solid fa-gift"></i>&nbsp;&nbsp;This gift has been purchased!&nbsp;&nbsp;<i class="fa-solid fa-gift"></i> </h4>
+                    {% else %}
+                        <div style = "border: 1px solid red; text-align: center; padding: 1rem;">
+                            <form action="" method="POST">
+                                {% csrf_token %}
+                                <input type="checkbox" id="purchased" name="purchased" value="Purchased">
+                                <label for="purchased"> Check here if you purchased this gift.</label><br><br>
+                                <button class="btn btn-outline-danger" type="submit">Save as Purchased</button>
+                            </form>
+                        </div>
+                    {% endif %}
+                {% endif %}
+             
+              
             </div>
         </div>
         <div class="container text-center mt-4 mb-4">    
-            <a class="btn btn-primary btn-lg" href="{% url 'myProfile' gift.user_id %}">Go Back</a>
+            <a class="btn btn-primary btn-lg" href="{% url 'profile' gift.user_id %}">Go Back</a>
+        </div>
+        <div>
+            Purchased: {{ gift.purchased }}
         </div>
     </body>
 {% endblock %}

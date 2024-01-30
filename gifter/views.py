@@ -14,6 +14,7 @@ class Profiles(ListView):
     model = Account
     template_name = 'gifter/profiles.html'
     context_object_name = 'profiles'
+    paginate_by = 8
 
 
 def profile(request, pk):
@@ -79,12 +80,28 @@ def addGift(request):
     return render(request, 'components/gift_add.html', {"form": form})
 
 
+
+
 def giftDetail(request, pk):
     gift = Gift.objects.get(id=pk)
+    form = GiftForm()
+
+    if request.method == 'POST':
+        form = GiftForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('profiles', {'form': form})
+   
     context = {  
         'gift': gift,
+        'form': form,
     }
+    
     return render(request, 'components/gift_detail.html', context)
+
+
+
+
 
 
 @login_required(login_url='login')

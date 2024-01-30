@@ -11,11 +11,10 @@
 		{% if user.is_authenticated %}
 			<h1>You are already registered.</h1>
 		{% else %}
-			<div class="form-group col-sm-12 col-md-6" id="register-form">
-				<h2 class="text-center">Please Register</h2>
+			<div class="form-group col-sm-12 col-md-6 mt-5" id="register-form">
+				<h2 class="text-center mt-5">Please Register</h2>
 				<form method='POST' enctype="multipart/form-data">
 					{% csrf_token %}
-					<hr>
 					{{ form|crispy }}
 					<button class="btn btn-primary w-100 mb-3">Submit</button>
 				</form>

@@ -13,7 +13,7 @@
 			<div class="w-75 mx-auto">
 				<form method='POST' enctype="multipart/form-data">
 					{% csrf_token %}
-					<hr>
+	
 					{{ form|crispy }}
 					<div class="col-sm-12 col-md-4 w-75 mx-auto">
 						<button class="btn btn-primary w-100">Submit</button>

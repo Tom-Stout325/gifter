@@ -24,14 +24,14 @@ class RegisterForm(UserCreationForm):
 
 class RegisterUpdate(forms.ModelForm):
 	password = None
-	email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control', 'type': 'email'}))
-	username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-	first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-	last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-	family = forms.ModelChoiceField(widget=forms.Select(attrs={'class': 'form-control'}),queryset=Family.objects.all())
-	birthday = forms.DateField(widget=forms.DateInput(attrs={'class':'form-content', 'type':'date'}))
-	anniversary = forms.DateField(widget=forms.DateInput(attrs={'class':'form-content', 'type':'date'}))
-	profile_image = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
+	email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control', 'type': 'email'}),required=False)
+	username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}),required=False)
+	first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}),required=False)
+	last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}),required=False)
+	family = forms.ModelChoiceField(widget=forms.Select(attrs={'class': 'form-control'}),queryset=Family.objects.all(),required=False)
+	birthday = forms.DateField(widget=forms.DateInput(attrs={'class':'form-content', 'type':'date'}),required=False)
+	anniversary = forms.DateField(widget=forms.DateInput(attrs={'class':'form-content', 'type':'date'}),required=False)
+	profile_image = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}),required=False)
 
 	class Meta:
 		model = Account

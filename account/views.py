@@ -13,10 +13,11 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 
 
-class RegisterUser(CreateView):
+class RegisterUser(CreateView, SuccessMessageMixin):
     form_class = RegisterForm
     template_name = 'registration/register.html'
     success_url = reverse_lazy('login')
+    success_message = "User updated"
 
 
 class RegisterUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
@@ -33,7 +34,8 @@ class RegisterUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
         messages.add_message(self.request, messages.ERROR, "Errors")
         return redirect('home')
 
-        
+
+
 def loginView(request):
     if request.method == 'POST':
         username = request.POST.get('username')
