@@ -1,4 +1,4 @@
->![Custom Django Admin](static/images/screenshot_9.png)
+>![Gifter][Custom Django Admin](static/images/screenshot_9.png)
 
 ><h1 align="center">G I F T E R<h1>
 
@@ -30,13 +30,13 @@ ___
 
 ___
 
->Screenshots:
->!(static/images/screenshot_3.png)
->!(static/images/screenshot_2.png)
->!(static/images/screenshot_7.png)
->!(static/images/screenshot_5.png)
->!(static/images/screenshot_4.png)
->!(static/images/screenshot_1.png)
->!(static/images/screenshot_8.png)
->!(static/images/screenshot_6.png)
+><h1 align="center">SCREENSHOTS<h1>
+>![Gifter][Gifter](static/images/screenshot_3.png)
+>![Gifter](static/images/screenshot_2.png)
+>![Gifter](static/images/screenshot_7.png)
+>![Gifter](static/images/screenshot_5.png)
+>![Gifter](static/images/screenshot_4.png)
+>![Gifter](static/images/screenshot_1.png)
+>![Gifter](static/images/screenshot_8.png)
+>![Parent's View](static/images/screenshot_6.png)
 
