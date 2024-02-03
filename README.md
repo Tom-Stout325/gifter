@@ -1,4 +1,4 @@
->![Gifter][Custom Django Admin](static/images/screenshot_9.png)
+![Custom Django Admin](static/images/screenshot_9.png)
 
 ><h1 align="center">G I F T E R<h1>
 
@@ -31,12 +31,12 @@ ___
 ___
 
 ><h1 align="center">SCREENSHOTS<h1>
->![Gifter][Gifter](static/images/screenshot_3.png)
->![Gifter](static/images/screenshot_2.png)
->![Gifter](static/images/screenshot_7.png)
->![Gifter](static/images/screenshot_5.png)
->![Gifter](static/images/screenshot_4.png)
->![Gifter](static/images/screenshot_1.png)
->![Gifter](static/images/screenshot_8.png)
->![Parent's View](static/images/screenshot_6.png)
+![Gifter][Gifter](static/images/screenshot_3.png)
+![User's Profile](static/images/screenshot_2.png)
+![User's Gift Page](static/images/screenshot_7.png)
+![All Families List](static/images/screenshot_5.png)
+![All Users List](static/images/screenshot_4.png)
+![Parent's Users List](static/images/screenshot_1.png)
+![Paren't user view](static/images/screenshot_8.png)
+![Parent's View](static/images/screenshot_6.png)
 
