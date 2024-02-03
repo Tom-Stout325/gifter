@@ -17,7 +17,7 @@ ___
 ![Markdown](https://img.shields.io/badge/Markdown-000000?style=for-the-badge&logo=markdown&logoColor=white)  
 ![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)
 
-
+![My Skills](https://skillicons.dev/icons?i=django,python,docker,postgreSQL,markdown,aws,html,github,css,javascript,git,)
 
 > Gifter is a cloud-based software that allows family members to register and create a wish list.  Gifter will allow other family members to log in and review details, such as birthdays, anniversaries, hobbies, and of course, a wish list of gifts they would like to receive.  Users can add details like color, size and quantity, as well as a description and were the gift can be purchased.  Users are registered as a parent or child.  Parents are able to mark a gift as 'Purchased' if they buy the gift, and other parents will see what gifts are still available as well as what has been purchased.  The 'Purchased' tag is not visible on a logged-in user's profile, so parents are not able to see what gifts have been purchased on their own list.
 
