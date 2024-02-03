@@ -1,4 +1,4 @@
-![Gifter](static/images/screenshots/screenshot_9.png)
+![Gifter](static/images/screenshot_9.png)
 
 ><h1 align="center">G I F T E R<h1>
 
@@ -32,7 +32,7 @@ ___
 
 <h1 align="center">SCREENSHOTS<h1>
 
-> ![Gifter](static/images/screenshots/screenshot_3.png)
+> ![Gifter](static/images/screenshot_3.png)
 ![Profile](static/images/screenshot_2.png)
 ![Gift Page](static/images/screenshot_7.png)
 ![All Families List](static/images/screenshot_5.png)
