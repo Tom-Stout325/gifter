@@ -1,0 +1,86 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}
+Wish List
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    {% for i in profile %}
+
+    <h2 class="text-center text-success">{{ i.first_name }}'s Wish List</h2>
+    <div class="row text-center">
+        <div class="card col-sm-12 col-md-3" style="width: 18rem;">
+            {% if i.profile_image %}
+                <img src="{{ MEDIA_URL}}{{ i.profile_image.url }}" class="card-img-top p-3" alt="avatar">
+            {% else %}
+                <img src="{% static 'images/default_user.png' %}" class="card-img-top p-3" alt="avatar">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title text-center text-primary">{{ i.first_name }} {{ i.last_name }}</h5>
+            </div>
+            <ul class="list-group list-group-flush ">
+                <li class="list-group-item">Username: {{ i.username }}</li>
+                <li class="list-group-item">Birthday: {{ i.birthday }}</li>
+                {% if i.anniversary %}
+                    <li class="list-group-item">Anniversary: {{ i.anniversary }}</li>
+                {% endif %}
+                    <li class="list-group-item">Family: &nbsp;<a href=""> {{ i.family}}</a></li>
+            </ul>
+        </div>
+        {% endfor %}
+        
+        <div class="col-sm-12 col-md-8">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Gift</th>
+                        <th scope="col">QTY</th>
+                        <th scope="col">Color</th>
+                        <th scope="col">Size</th>
+                        <th scope="col">Store</th>
+                        <th scope="col">Purchased?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in gift %}
+                    <tr>
+                        <td>{{ i.name }}</td>
+                        <td>{{ i.qty }}</td>
+
+                        {% if i.color %}
+                            <td>{{ i.color }}</td>
+                        {% else %}
+                            <td><p class="d-none">n/a</p></td>
+                        {% endif %}
+
+                        {% if i.size %}
+                            <td>{{ i.size }}</td>
+                        {% else %}
+                            <td><p class="d-none">n/a</p></td>
+                        {% endif %}
+                        <td>
+                            <a type="submit" class="btn btn-success" href="{% url 'parentGiftDetail' i.id %}">
+                                <i class="fa-solid fa-gift"></i> View Details
+                            </a>
+                        </td>
+
+                        {% if i.purchased %}
+                            <td class="text-danger"><p> Purchased!</p></td>
+                        {% else %}
+                            <td class="text-success"><i class="fa-solid fa-gift"></i></td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                    
+                </tbody>
+            </table>
+            <a class="btn btn-primary" href="">Go Back</a>
+        </div>
+    </div>
+    <div>
+        <br>
+    </div>
+{% endblock %}

@@ -1,70 +1,34 @@
-{% extends 'index.html' %} 
-{% load static %} 
+{% extends 'index.html' %}
+{% load static %}
 
-{% block title %} 
-    Users
-{% endblock %} 
+{% block title %}
+Users
+{% endblock %}
 
 
 {% block content %}
 
 <body>
-  
-  <h1 class="container fs-2">This is the Home Page</h1>
-  <br />
 
-  
-<ul>
-  <li>
-    <a href="{% url 'login' %}">Login</a>
-  </li>
-  <li>
-    <a href="{% url 'register' %}">Register</a>
-  </li>
-  <li>
-    <a href="{% url 'addGift' %}">Create Gift</a>
-  </li>
-  <li>
-    <a href="http://127.0.0.1:8000/admin">Admin</a>
-  </li>
-  <li>
-    <a href="http://127.0.0.1:8000/accounts/password_change/">Password Change</a>
-  </li>
-  <li>
-    <a href="http://127.0.0.1:8000/accounts/password_change/done/">Password Change Done</a>
-  </li>
-  <li>
-    <a href="http://127.0.0.1:8000/accounts/password_reset/">Password Reset</a>
-  </li>
-</ul>
 
-<div class="container w-50">
-  <p>
+  <div class="container w-50">
+    <p>
       Gifter is an application that allows family memebers to create a wishlist of gift ideas for all occassions
       throught the year. Family members can register their account, add their name to the appropriate family, then
       complete their profile with their birthday, anniversary, hobbies, clothing sizes and gift wishlist.
-  </p>
-  <p>
-      Gifter is a cloud based Python/Django application that utilizes a PostgreSQL database and has a custom user model with authentication.
-  </p>
-  <p>Users are required to log in to view this application.  For your convenience, visitors can log in as a guest to review this application.</p>
-  <p class="text-center text-muted">Username:  guest     &nbsp &nbsp &nbsp   Password:  guest</p>
-</div>
+    </p>
+    <p>
+      Gifter is a cloud based Python/Django application that utilizes a PostgreSQL database and has a custom user model
+      with authentication.
+    </p>
+    <p>Users are required to log in to view this application. For your convenience, visitors can log in as a guest to
+      review this application.</p>
+
+    <p>
+      Parent and login required functions have been disabled to allow views to see all pages.
+    </p>
+  </div>
   <hr>
-
-<!-- <a href="http://127.0.0.1:8000/"></a> -->
-
-
-
-
-<!-- accounts/login/ [name='login']
-# accounts/logout/ [name='logout']
-# accounts/password_change/ [name='password_change']
-# accounts/password_change/done/ [name='password_change_done']
-# accounts/password_reset/ [name='password_reset']
-# accounts/password_reset/done/ [name='password_reset_done']
-# accounts/reset/<uidb64>/<token>/ [name='password_reset_confirm']
-# accounts/reset/done/ [name='password_reset_complete'] -->
 </body>
 
 {% endblock %}

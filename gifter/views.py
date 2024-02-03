@@ -80,8 +80,6 @@ def addGift(request):
     return render(request, 'components/gift_add.html', {"form": form})
 
 
-
-
 def giftDetail(request, pk):
     gift = Gift.objects.get(id=pk)
     form = GiftForm()
@@ -100,6 +98,42 @@ def giftDetail(request, pk):
     return render(request, 'components/gift_detail.html', context)
 
 
+class ParentList(ListView):
+    model = Account
+    template_name = 'gifter/parent_giftList.html'   
+    context_object_name = 'list'
+
+
+
+def listDetail(request, pk):
+    profile = Account.objects.filter(id=pk)
+    gift = Gift.objects.filter(user__id=pk)
+    
+    context = {
+        'profile': profile,
+        'gift': gift,
+    }
+    print(profile)
+    return render(request, 'gifter/parent_profile_gift_list.html', context)
+
+
+def parentGiftDetail(request, pk):
+    gift = Gift.objects.get(id=pk)
+    form = GiftForm(instance=gift)
+    context = {
+            'form': form,
+            'gift': gift,
+        }
+    if request.method == 'POST':
+        form = GiftForm(request.POST, instance=gift)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Gift has been purchased') 
+            return redirect('parentList')
+   
+        return render(request, 'gifter/parent_gift_detail.html', context)
+
+    return render(request, 'gifter/parent_gift_detail.html', context)
 
 
 
@@ -116,7 +150,7 @@ def giftUpdate(request, pk):
         form = GiftForm(request.POST, request.FILES, instance=gift)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Your hobby has been updated') 
+            messages.success(request, 'Your gift has been updated') 
             return redirect(f'/my-profile/{gift.user_id}')
    
         return render(request, 'components/gift_update.html', context)

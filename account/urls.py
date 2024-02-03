@@ -25,5 +25,3 @@ if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-
-     # Password reset links (ref: https://github.com/django/django/blob/master/django/contrib/auth/views.py)

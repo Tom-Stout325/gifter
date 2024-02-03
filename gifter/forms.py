@@ -14,19 +14,11 @@ class GiftForm(forms.ModelForm):
     size = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}),required=False)
     store = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}),required=False)
     description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}),required=False)
-    
-    class Meta:
-        model = Gift
-        fields = ['name', 'qty', 'image', 'color', 'size', 'store', 'description']
-
-
-class GiftPurchase(forms.Form):
     purchased = forms.BooleanField(widget=forms.CheckboxInput(attrs={'class': 'form-control'}), required=False)
-
+    
     class Meta:
         model = Gift
-        fields = ['purchased']
-    
+        fields = ['name', 'qty', 'image', 'color', 'size', 'store', 'description', 'purchased']
 
 
 class HobbyForm(forms.ModelForm):

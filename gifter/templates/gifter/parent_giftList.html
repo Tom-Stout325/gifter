@@ -1,0 +1,52 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}
+Parent's List
+{% endblock %}
+
+
+{% block content %}
+
+<body>
+    <div class="container">
+        <h1 class="text-center text-success mt-5 mb-5">Wish List</h1>
+    </div>
+    <div class="container">
+        <p class="text-center text-muted">This page will be viewable by parents only.</p>
+        <p class="text-center text-muted">Parent's will not see their own profile listed here.</p>
+    </div>
+    <div class="row container mx-auto">
+        {% for user in list %}
+        <div class="card" style="width: 18rem; height: 33rem; margin: 2rem ">
+            {% if user.profile_image %}
+            <img src="{{ MEDIA_URL}}{{ user.profile_image.url }}" alt="avatar"
+                style="width: 15rem; height: 15rem; object-fit: contain; margin: 1rem;">
+            {% else %}
+            <img src="{% static 'images/default_user.png' %}" alt="avatar">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title text-center text-primary">{{ user.first_name }} {{ user.last_name }}</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Username: {{ user.username}}</li>
+                <li class="list-group-item">Birthday:{{ user.birthday }}</li>
+                {% if user.anniversary %}
+                <li class="list-group-item">Anniversary:{{ user.anniversary }}</li>
+                {% else %}
+                <li class="list-group-item">Anniversary: n/a</li>
+                {% endif %}
+                <br>
+                <li>
+                    <a href="{% url 'listDetail' user.id%}" class="card-link btn btn-outline-primary  d-grid gap-2">{{ user.first_name }}'s Wish List</a></span>
+                </li>
+                <br>
+
+            </ul>
+        </div>
+     
+        {% endfor %}
+    </div>
+
+</body>
+{% endblock %}
