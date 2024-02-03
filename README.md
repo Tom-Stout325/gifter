@@ -1,4 +1,4 @@
-![Custom Django Admin](static/images/screenshot_9.png)
+![Custom Django Admin](gifter/static/images/screenshot_9.png)
 
 ><h1 align="center">G I F T E R<h1>
 
@@ -9,7 +9,7 @@ ___
 
 
 
-![My Skills](https://skillicons.dev/icons?i=django,python,docker,postgres,markdown,aws,html,github,css,javascript,git,)
+![My Skills](https://skillicons.dev/icons?i=django,python,docker,postgres,markdown,aws,html,github,css,javascript,git)
 
 > Gifter is a cloud-based software application that allows family members to register and create a wish list.  Gifter will allow other family members to log in and review details, such as birthdays, anniversaries, hobbies, and of course, a wish list of gifts they would like to receive.  Users can add details like color, size and quantity, as well as a description and were the gift can be purchased.  Users are registered as a parent or child.  Parents are able to mark a gift as 'Purchased' if they buy the gift, and other parents will see what gifts are still available as well as what has been purchased.  The 'Purchased' tag is not visible on a logged-in user's profile, so parents are not able to see what gifts have been purchased on their own list.
 
@@ -31,7 +31,8 @@ ___
 ___
 
 ><h1 align="center">SCREENSHOTS<h1>
-![Gifter][Gifter](static/images/screenshot_3.png)
+
+>![Gifter](gifter/static/images/screenshot_3.png)
 ![User's Profile](static/images/screenshot_2.png)
 ![User's Gift Page](static/images/screenshot_7.png)
 ![All Families List](static/images/screenshot_5.png)
